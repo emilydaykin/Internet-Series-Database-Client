@@ -1,0 +1,15 @@
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // setting 1rem = 10px (1.6rem = original default 16px)
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: #000;
+}
