@@ -50,14 +50,14 @@ const ShowSeries = () => {
   }
 
   return (
-    <section>
+    <section className='show-series'>
       <h1>{series.name}</h1>
-      <div className='info-wrapper'>
-        <div className='poster-large'>
+      <div className='show-series__wrapper'>
+        <div className='show-series__poster'>
           <img src={series.image} alt='' />
         </div>
-        <div className='info'>
-          <div className='series-info'>
+        <div className='show-series__info-wrapper'>
+          <div className='show-series__info'>
             <p>
               <span>Genre</span>: {series.genre.join(', ')}
             </p>
@@ -74,27 +74,27 @@ const ShowSeries = () => {
               <span>Average Rating</span>: {series.rating} ⭐️
             </p>
           </div>
-          <div className='comments-section'>
-            <form onSubmit={handleCommentSubmit}>
-              <div className='password field'>
-                <label htmlFor='comment' className='label'>
+          <div className='show-series__leave-comments-section'>
+            <form onSubmit={handleCommentSubmit} className='form'>
+              <div className='form__field form__field--comment'>
+                <label htmlFor='comment' className='form__label'>
                   Leave a comment!
                 </label>
                 <textarea
                   type='textarea'
-                  className='input'
+                  className='form__input'
                   id='comment'
                   value={commentValue}
                   onChange={handleCommentChange}
                 ></textarea>
               </div>
-              <div className='rating field'>
-                <label htmlFor='rating' className='label'>
+              <div className='form__field form__field--rating'>
+                <label htmlFor='rating' className='form__label'>
                   Leave a rating (1-5)!
                 </label>
                 <input
                   type='number'
-                  className='input'
+                  className='form__input'
                   id='rating'
                   min='1'
                   max='5'
@@ -102,18 +102,18 @@ const ShowSeries = () => {
                   onChange={handleRatingChange}
                 />
               </div>
-              <button>Submit!</button>
+              <button className='button'>Submit!</button>
             </form>
           </div>
         </div>
       </div>
 
-      <div className='displayed-comments'>
-        <h2>All Comments 💬</h2>
+      <div className='show-series__displayed-comments'>
+        <h2 className='u-margin-bottom-small'>All Comments 💬</h2>
         {series.comments.map((comment) => {
           return (
-            <div className='single-comment-line' key={comment._id}>
-              <div className='individual-comment'>
+            <div className='show-series__single-comment-line' key={comment._id}>
+              <div className='show-series__individual-comment'>
                 <p>{comment.text}</p>
                 <p>{comment.rating}</p>
               </div>

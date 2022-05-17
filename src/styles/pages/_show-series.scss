@@ -1,0 +1,102 @@
+.show-series {
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid orange;
+  }
+  
+  &__poster {
+    border: 2px solid blue;
+    width: 25%;
+  
+    img {
+      width: 100%;
+    }
+  }
+  
+  &__info-wrapper {
+    // width: 47.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+  }
+  
+  &__info {
+    box-shadow: .1rem 0 1.7rem 1.3rem $theme-midnight-blue;
+    padding: .2rem 2rem;
+    border-radius: 2rem;
+  
+    span {
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+  }
+  
+  &__leave-comments-section {
+    margin-top: 4rem;
+  
+    // reduce the highlight on the comments section - make more subtle
+    form {
+      box-shadow: .1rem .1rem 1.9rem 1.1rem rgba($theme-midnight-blue, 0.7);
+  
+      #comment {
+        height: 7.5rem;
+      }
+  
+      #rating {
+        width: 5rem;
+      }
+  
+      button {
+        margin-top: 0;
+      }
+    }
+  }
+  
+  &__displayed-comments {
+    box-shadow: .1rem .1rem 1.9rem 1.1rem rgba($theme-midnight-blue, 0.7);
+    border-radius: .7rem;
+    margin-top: 3rem;
+    padding: 2.5rem;
+    padding-top: 2rem;
+  
+    h2 {
+      margin-top: 0;
+      font-weight: 600;
+    }
+  }
+  
+  &__single-comment-line {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    button {
+      width: 4rem;
+      height: 4rem;
+      padding: 0;
+      background-color: $theme-grey;
+      border: none;
+      border-radius: .7rem;
+      align-self: center;
+  
+      &:hover {
+        cursor: pointer;
+        background-color: $theme-white;
+      }
+    }
+  }
+
+  &__individual-comment {
+    border: 1px solid azure;
+    border-radius: .5rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin: .7rem 1rem;
+    width: 100%;
+
+    
+  }
+}
