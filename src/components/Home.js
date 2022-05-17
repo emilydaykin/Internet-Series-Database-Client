@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <section>
       <h1>
-        <span>LSDb</span> Localhost Series Database
+        <span>ISDb</span> Internet Series Database
       </h1>
 
       {series ? (
