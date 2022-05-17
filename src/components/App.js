@@ -9,8 +9,6 @@ import AddSeries from './AddSeries';
 import UserProfile from './UserProfile';
 import { getLoggedInUser, isAdmin } from '../lib/auth';
 
-import '../styles/style.scss';
-
 const App = () => (
   <BrowserRouter>
     <Navbar />
