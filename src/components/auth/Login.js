@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loginUser } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,33 +27,33 @@ const Login = () => {
       <h1>
         <span>LSDb</span> Login
       </h1>
-      <div className='login-form'>
-        <form onSubmit={handleSubmit}>
-          <div className='email field'>
-            <label htmlFor='email' className='label'>
+      <div className='form-wrapper'>
+        <form onSubmit={handleSubmit} className='form'>
+          <div className='form__field form__field--email'>
+            <label htmlFor='email' className='form__label'>
               Email
             </label>
             <input
               type='text'
-              className='input'
+              className='form__input'
               id='email'
               value={emailValue}
               onChange={handleEmailChange}
             />
           </div>
-          <div className='password field'>
-            <label htmlFor='password' className='label'>
+          <div className='form__field form__field--password'>
+            <label htmlFor='password' className='form__label'>
               Password
             </label>
             <input
               type='password'
-              className='input'
+              className='form__input'
               id='password'
               value={passwordValue}
               onChange={handlePasswordChange}
             />
           </div>
-          <button>Login</button>
+          <button className='button'>Login</button>
         </form>
       </div>
     </section>

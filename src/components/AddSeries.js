@@ -49,76 +49,86 @@ const AddSeries = () => {
   }
 
   return (
-    <section>
+    <section className='add-series'>
       <h1>
         <span>LSDb</span> Add a Series
       </h1>
-      <div className='add-series-form-wrapper'>
-        <form className='add-series-form' onSubmit={handleSubmit}>
-          <div className='input-fields-wrapper'>
-            <div className='form-left'>
-              <div className='name field'>
-                <label htmlFor='name' className='label'>
+      <div className='form-wrapper'>
+        <form className='form' onSubmit={handleSubmit}>
+          <div className='form__input-fields-wrapper'>
+            <div className='form__left'>
+              <div className='form__field form__field--name'>
+                <label htmlFor='name' className='form__label'>
                   Name*
                 </label>
-                <input type='text' className='input' id='name' onChange={handleChange} />
+                <input type='text' className='form__input' id='name' onChange={handleChange} />
               </div>
-              <div className='genre field'>
-                <label htmlFor='genre' className='label'>
+              <div className='form__field form__field--genre'>
+                <label htmlFor='genre' className='form__label'>
                   Genre*
                 </label>
-                <input type='text' className='input' id='genre' onChange={handleChange} />
+                <input type='text' className='form__input' id='genre' onChange={handleChange} />
               </div>
-              <div className='description field'>
-                <label htmlFor='description' className='label'>
+              <div className='form__field form__field--description'>
+                <label htmlFor='description' className='form__label'>
                   Description
                 </label>
-                <input type='text' className='input' id='description' onChange={handleChange} />
+                <input
+                  type='text'
+                  className='form__input'
+                  id='description'
+                  onChange={handleChange}
+                />
               </div>
-              <div className='actors field'>
-                <label htmlFor='actors' className='label'>
+              <div className='form__field form__field--actors'>
+                <label htmlFor='actors' className='form__label'>
                   Actors
                 </label>
-                <input type='text' className='input' id='actors' onChange={handleChange} />
+                <input type='text' className='form__input' id='actors' onChange={handleChange} />
               </div>
             </div>
             <div className='form-right'>
-              <div className='pilot-year field'>
-                <label htmlFor='pilot-year' className='label'>
+              <div className='form__field form__field--pilot-year'>
+                <label htmlFor='pilot-year' className='form__label'>
                   Pilot Year*
                 </label>
-                <input type='text' className='input' id='pilotYear' onChange={handleChange} />
+                <input type='text' className='form__input' id='pilotYear' onChange={handleChange} />
               </div>
-              <div className='finale-year field'>
-                <label htmlFor='finale-year' className='label'>
+              <div className='form__field form__field--finale-year'>
+                <label htmlFor='finale-year' className='form__label'>
                   Finale Year
                 </label>
-                <input type='text' className='input' id='finaleYear' onChange={handleChange} />
+                <input
+                  type='text'
+                  className='form__input'
+                  id='finaleYear'
+                  onChange={handleChange}
+                />
               </div>
-              <div className='avg-rating field'>
-                <label htmlFor='avg-rating' className='label'>
+              <div className='form__field form__field--avg-rating'>
+                <label htmlFor='avg-rating' className='form__label'>
                   Average rating
                 </label>
                 <input
                   type='number'
                   step='0.1'
-                  className='input'
+                  className='form__input'
                   id='rating'
                   onChange={handleChange}
                 />
               </div>
-              <div className='poster-image field'>
-                <label htmlFor='poster-image' className='label'>
+              <div className='form__field form__field--poster-image'>
+                <label htmlFor='poster-image' className='form__label'>
                   Poster URL*
                 </label>
-                <input type='text' className='input' id='image' onChange={handleChange} />
+                <input type='text' className='form__input' id='image' onChange={handleChange} />
               </div>
             </div>
           </div>
           <div>
             <span className='footnote'>* required</span>
           </div>
-          <button>Add</button>
+          <button className='button'>Add</button>
         </form>
       </div>
     </section>

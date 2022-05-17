@@ -30,57 +30,57 @@ const Register = () => {
       <h1>
         <span>LSDb</span> Register
       </h1>
-      <div className='login-form'>
-        <form onSubmit={handleSubmit}>
-          <div className='name field'>
-            <label htmlFor='name' className='label'>
+      <div className='form-wrapper'>
+        <form onSubmit={handleSubmit} className='form'>
+          <div className='form__field form__field--name'>
+            <label htmlFor='name' className='form__label'>
               Name
             </label>
             <input
               type='text'
-              className='input'
+              className='form__input'
               id='name'
               value={formData.name}
               onChange={handleChange}
             />
           </div>
-          <div className='email field'>
-            <label htmlFor='email' className='label'>
+          <div className='form__field form__field--email'>
+            <label htmlFor='email' className='form__label'>
               Email
             </label>
             <input
               type='text'
-              className='input'
+              className='form__input'
               id='email'
               value={formData.email}
               onChange={handleChange}
             />
           </div>
-          <div className='password field'>
-            <label htmlFor='password' className='label'>
+          <div className='form__field form__field--password'>
+            <label htmlFor='password' className='form__label'>
               Password
             </label>
             <input
               type='password'
-              className='input'
+              className='form__input'
               id='password'
               value={formData.password}
               onChange={handleChange}
             />
           </div>
-          <div className='passwordConfirmation field'>
-            <label htmlFor='passwordConfirmation' className='label'>
+          <div className='form__field form__field--password-confirmation'>
+            <label htmlFor='passwordConfirmation' className='form__label'>
               Password Confirmation
             </label>
             <input
               type='password'
-              className='input'
+              className='form__input'
               id='passwordConfirmation'
               value={formData.passwordConfirmation}
               onChange={handleChange}
             />
           </div>
-          <button>Register</button>
+          <button className='button'>Register</button>
         </form>
       </div>
     </section>
