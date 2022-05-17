@@ -3,6 +3,7 @@
   &__catalogue {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__series-card {
@@ -14,7 +15,7 @@
     align-items: center;
     text-align: center;
     padding: 2rem;
-    margin: 2rem;
+    margin: 3rem 3.5rem;
     transition: .3s ease-in-out;
 
     &:hover {

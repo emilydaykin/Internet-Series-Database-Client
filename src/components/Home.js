@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <section className='home'>
-      <h1>
+      <h1 className='u-margin-bottom-small'>
         <span>ISDb</span> Internet Series Database
       </h1>
       {series ? (
