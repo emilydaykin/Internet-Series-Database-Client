@@ -6,61 +6,7 @@
 @import "base/typography";
 @import "base/utilities";
 
-
-section {
-  margin: 3rem;
-}
-
-h1 {
-  font-weight: bold;
-  font-size: 3rem;
-  margin-top: 2rem;
-  font-weight: 600;
-
-  span {
-    border: 2px solid $theme-yellow;
-    background-color: $theme-yellow;
-    color: $theme-black;
-    border-radius: .8rem;
-    padding: .1rem .7rem;
-    font-weight: 700;
-  }
-}
-
-p {
-  font-size: 1.3rem;
-}
-
-// NAVBAR
-header {
-  // background-color: rgba(8,69,84,0.53);
-  background-color: rgba($theme-midnight-blue, 0.55);
-  
-  .navbar {
-    height: 6vh;
-    min-height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .navbar-item {
-    text-decoration: none;
-    padding: 2rem;
-    font-weight: 600;
-    color: $theme-white;
-    text-transform: uppercase;
-
-    &:hover {
-      color: $theme-blue-light;
-    }
-  }
-  .logout:hover {
-    cursor: pointer;  
-  }
-  .nav-user {
-    display: flex;
-  }
-}
+@import "layout/navbar";
 
 
 // HOME PAGE

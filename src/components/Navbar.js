@@ -34,34 +34,34 @@ const Navbar = () => {
   return (
     <header>
       <nav className='navbar'>
-        <div className='nav-series'>
-          <Link className='navbar-item' to={'/'}>
+        <div className='navbar__left'>
+          <Link className='navbar__item' to={'/'}>
             🎬 Home 🎥
           </Link>
           {/* isAdmin() */}
           {isLoggedInUser && (
-            <Link className='navbar-item' to={'/addSeries'}>
+            <Link className='navbar__item' to={'/addSeries'}>
               📺 Add Series 📀
             </Link>
           )}
         </div>
 
-        <div className='nav-user'>
+        <div className='navbar__right'>
           {isLoggedInUser === false ? (
             <>
-              <Link className='navbar-item' to={'/login'}>
+              <Link className='navbar__item' to={'/login'}>
                 🍿 Log in 🎫
               </Link>
-              <Link className='navbar-item' to={'/register'}>
+              <Link className='navbar__item' to={'/register'}>
                 🎭 Register 🎞
               </Link>
             </>
           ) : (
             <>
-              <Link className='navbar-item' to={'/userprofile'}>
+              <Link className='navbar__item' to={'/userprofile'}>
                 👑 My profile 😎
               </Link>
-              <div className='navbar-item logout' onClick={logoutUser}>
+              <div className='navbar__item navbar__item--logout' onClick={logoutUser}>
                 ⛔️ Logout ↗️
               </div>
             </>
