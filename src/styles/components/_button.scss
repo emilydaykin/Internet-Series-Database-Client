@@ -1,0 +1,20 @@
+.button {
+  padding: .9rem 2rem;
+  width: 25rem;
+  margin: 2.5rem 1rem;
+  background-color: $theme-midnight-blue;
+  border-radius: 1rem;
+  border: 3px solid $theme-midnight-blue;
+  color: $theme-white;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $theme-white;
+    border: 3px solid $theme-midnight-blue;
+    color: $theme-midnight-blue;
+    cursor: pointer;
+  }
+}
