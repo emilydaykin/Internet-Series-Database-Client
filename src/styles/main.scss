@@ -18,9 +18,9 @@ h1 {
   font-weight: 600;
 
   span {
-    border: 2px solid #f3ce13;
-    background-color: #f3ce13;
-    color: #000;
+    border: 2px solid $theme-yellow;
+    background-color: $theme-yellow;
+    color: $theme-black;
     border-radius: .8rem;
     padding: .1rem .7rem;
     font-weight: 700;
@@ -33,7 +33,8 @@ p {
 
 // NAVBAR
 header {
-  background-color: rgba(8,69,84,0.53);
+  // background-color: rgba(8,69,84,0.53);
+  background-color: rgba($theme-midnight-blue, 0.55);
   
   .navbar {
     height: 6vh;
@@ -46,11 +47,11 @@ header {
     text-decoration: none;
     padding: 2rem;
     font-weight: 600;
-    color: #fff;
+    color: $theme-white;
     text-transform: uppercase;
 
     &:hover {
-      color: #8ce6ff;  //bbf0ff
+      color: $theme-blue-light;
     }
   }
   .logout:hover {
@@ -68,7 +69,7 @@ header {
   flex-wrap: wrap;
   
   .series-card {
-    box-shadow: 1px 0px 17px 12px rgba(10, 86, 105,0.9);
+    box-shadow: .1rem 0 1.7rem 1.2rem rgba($theme-midnight-blue, 0.9);
     border-radius: 2.5rem;
     max-width: 30rem;
     display: flex;
@@ -87,7 +88,7 @@ header {
     }
     
     .link {
-      color: #fff;
+      color: $theme-white;
       text-decoration: none;
 
       h2 {
@@ -117,7 +118,7 @@ header {
     align-items: center;
 
     .series-info {
-      box-shadow: .1rem 0px 1.7rem 1.3rem #0A5669;
+      box-shadow: .1rem 0 1.7rem 1.3rem $theme-midnight-blue;
       padding: .2rem 2rem;
       border-radius: 2rem;
 
@@ -131,7 +132,7 @@ header {
       margin-top: 4rem;
       
       form {
-        box-shadow: .1rem .1rem 1.9rem 1.1rem rgba(11, 92, 112,0.7);
+        box-shadow: .1rem .1rem 1.9rem 1.1rem rgba($theme-midnight-blue, 0.7);
 
         #comment {
           height: 7.5rem;
@@ -146,12 +147,11 @@ header {
         }
       }
     }
-
   }
 }
 
 .displayed-comments {
-  box-shadow: .1rem .1rem 1.9rem 1.1rem rgba(11, 92, 112,0.7);
+  box-shadow: .1rem .1rem 1.9rem 1.1rem rgba($theme-midnight-blue, 0.7);
   border-radius: .7rem;
   margin-top: 3rem;
   padding: 1.5rem 2.5rem;
@@ -179,14 +179,14 @@ header {
       width: 4rem;
       height: 4rem;
       padding: 0;
-      background-color: #b6b6b6;
+      background-color: $theme-grey;
       border: none;
       border-radius: .7rem;
       align-self: center;
 
       &:hover {
         cursor: pointer;
-        background-color: #fff;
+        background-color: $theme-white;
       }
     }
   }
@@ -201,7 +201,7 @@ header {
 
 form {
   margin-top: 1rem;
-  box-shadow: .1rem .1rem 1.9rem 1.4rem #0B5C70;
+  box-shadow: .1rem .1rem 1.9rem 1.4rem $theme-midnight-blue;
   border-radius: 2rem;
   padding: 1rem 2rem;
   display: flex;
@@ -232,19 +232,19 @@ form {
     padding: .9rem 2rem;
     width: 25rem;
     margin: 2.5rem 1rem;
-    background-color: #0A5669;
+    background-color: $theme-midnight-blue;
     border-radius: 1rem;
-    border: 3px solid #0A5669;
-    color: #fff;
+    border: 3px solid $theme-midnight-blue;
+    color: $theme-white;
     font-family: inherit;
     font-weight: bold;
     font-size: 1.7rem;
     text-transform: uppercase;
 
     &:hover {
-      background-color: #fff;
-      border: 3px solid #0A5669;
-      color: #0A5669;
+      background-color: $theme-white;
+      border: 3px solid $theme-midnight-blue;
+      color: $theme-midnight-blue;
       cursor: pointer;
     }
   }
