@@ -1,70 +1,103 @@
 .show-series {
+  display: flex;
+  flex-direction: column;
 
-  &__wrapper {
+  &__title {
+    margin-top: 0;
+  }
+
+  &__series-wrapper {
     display: flex;
-    justify-content: space-between;
-    border: 2px solid orange;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
+    width: 90%;
+    margin-top: 2rem;
   }
   
   &__poster {
-    border: 2px solid blue;
     width: 25%;
+    max-width: 25rem;
+    display: flex;
+    align-items: center;
   
     img {
       width: 100%;
+      border-radius: .5rem;
     }
   }
   
-  &__info-wrapper {
-    // width: 47.5%;
+  &__info {
+    width: 52%;
     display: flex;
     flex-direction: column;
-    align-items: center;  
-  }
-  
-  &__info {
     box-shadow: .1rem 0 1.7rem 1.3rem $theme-midnight-blue;
-    padding: .2rem 2rem;
+    padding: 1.5rem 2.5rem;
     border-radius: 2rem;
   
+    p {
+      margin: .75rem;
+    }
+
     span {
       font-weight: 600;
       font-size: 1.8rem;
     }
   }
   
-  &__leave-comments-section {
-    margin-top: 4rem;
-  
-    // reduce the highlight on the comments section - make more subtle
-    form {
-      box-shadow: .1rem .1rem 1.9rem 1.1rem rgba($theme-midnight-blue, 0.7);
-  
-      #comment {
-        height: 7.5rem;
-      }
-  
-      #rating {
-        width: 5rem;
-      }
-  
-      button {
-        margin-top: 0;
-      }
-    }
-  }
-  
-  &__displayed-comments {
+  // reduce the highlight on the comments section - make more subtle
+  &__comments-section {
     box-shadow: .1rem .1rem 1.9rem 1.1rem rgba($theme-midnight-blue, 0.7);
     border-radius: .7rem;
-    margin-top: 3rem;
+    margin-top: 7rem;
     padding: 2.5rem;
     padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
   
     h2 {
       margin-top: 0;
       font-weight: 600;
     }
+  }
+
+  &__comments-content {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin: 2rem 0;
+  }
+
+  &__leave-comments-section {
+
+    .comments-form {
+      border: 3px solid $theme-midnight-blue;
+      border-radius: 1rem;
+      padding: 1.5rem 3rem;
+
+      #comment {
+        height: 7.5rem;
+      }
+
+      #rating {
+        width: 6rem;
+      }
+
+      button {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__displayed-comments {
+    max-width: 60%;
+    margin-left: 7rem;
+  }
+
+  &__no-comments {
+    text-transform: uppercase;
   }
   
   &__single-comment-line {
@@ -91,12 +124,18 @@
   &__individual-comment {
     border: 1px solid azure;
     border-radius: .5rem;
-    padding: 1rem 1.5rem;
+    padding: 1.25rem 1.75rem;
     display: flex;
     justify-content: space-between;
     margin: .7rem 1rem;
     width: 100%;
 
-    
+    & p:first-child {
+      width: 95%;
+    }
+
+    & p:last-child {
+      align-self: center;
+    }
   }
 }

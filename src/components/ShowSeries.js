@@ -51,31 +51,39 @@ const ShowSeries = () => {
 
   return (
     <section className='show-series'>
-      <h1>{series.name}</h1>
-      <div className='show-series__wrapper'>
+      <h1 className='show-series__title'>{series.name}</h1>
+      <div className='show-series__series-wrapper'>
         <div className='show-series__poster'>
           <img src={series.image} alt='' />
         </div>
-        <div className='show-series__info-wrapper'>
-          <div className='show-series__info'>
-            <p>
-              <span>Genre</span>: {series.genre.join(', ')}
-            </p>
-            <p>
-              <span>Pilot Year</span>: {series.pilotYear}
-            </p>
-            <p>
-              <span>Finale Year</span>: {series.finaleYear}
-            </p>
-            <p>
-              <span>Plot</span>: {series.description}
-            </p>
-            <p>
-              <span>Average Rating</span>: {series.rating} ⭐️
-            </p>
-          </div>
+
+        <div className='show-series__info'>
+          <p>
+            <span>Genre</span>: {series.genre.join(', ')}
+          </p>
+          <p>
+            <span>Plot</span>: {series.description}
+          </p>
+          <p>
+            <span>Actors</span>: {series.actors.join(', ')}
+          </p>
+          <p>
+            <span>Pilot Year</span>: {series.pilotYear}
+          </p>
+          <p>
+            <span>Finale Year</span>: {series.finaleYear}
+          </p>
+          <p>
+            <span>Average IMDb Rating</span>: {series.rating} ⭐️
+          </p>
+        </div>
+      </div>
+
+      <div className='show-series__comments-section'>
+        <h2 className='u-margin-bottom-small'>Comments 💬</h2>
+        <div className='show-series__comments-content'>
           <div className='show-series__leave-comments-section'>
-            <form onSubmit={handleCommentSubmit} className='form'>
+            <form onSubmit={handleCommentSubmit} className='comments-form'>
               <div className='form__field form__field--comment'>
                 <label htmlFor='comment' className='form__label'>
                   Leave a comment!
@@ -105,24 +113,29 @@ const ShowSeries = () => {
               <button className='button'>Submit!</button>
             </form>
           </div>
+          <div className='show-series__displayed-comments'>
+            {series.comments.length === 0 ? (
+              <p>
+                <span className='show-series__no-comments'>No comments yet.</span>
+                <br /> Have you watched {series.name}? <br /> Be the first to leave a comment!
+              </p>
+            ) : (
+              series.comments.map((comment) => {
+                return (
+                  <div className='show-series__single-comment-line' key={comment._id}>
+                    <div className='show-series__individual-comment'>
+                      <p>{comment.text}</p>
+                      <p>{comment.rating}</p>
+                    </div>
+                    {getLoggedInUser() === comment.createdBy && (
+                      <button onClick={() => handleCommentDelete(comment._id)}>❌</button>
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
-      </div>
-
-      <div className='show-series__displayed-comments'>
-        <h2 className='u-margin-bottom-small'>All Comments 💬</h2>
-        {series.comments.map((comment) => {
-          return (
-            <div className='show-series__single-comment-line' key={comment._id}>
-              <div className='show-series__individual-comment'>
-                <p>{comment.text}</p>
-                <p>{comment.rating}</p>
-              </div>
-              {getLoggedInUser() === comment.createdBy && (
-                <button onClick={() => handleCommentDelete(comment._id)}>❌</button>
-              )}
-            </div>
-          );
-        })}
       </div>
     </section>
   );
