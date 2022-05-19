@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getAllSeries } from '../api/series';
+import { getAllSeries, filterSeriesByGenre } from '../api/series';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -12,6 +12,11 @@ const Home = () => {
       setSeries(allSeries);
     };
     getData();
+
+    // const filterSeries = async () => {
+    //   const filteredSeries = await filterSeriesByGenre('crime');
+    // };
+    // filterSeries();
   }, []);
 
   console.log('all series:', series);

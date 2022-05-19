@@ -18,6 +18,16 @@ export const getSeriesById = async (id) => {
   return data;
 };
 
+export const filterSeriesByGenre = async (genre) => {
+  const options = {
+    method: 'GET',
+    url: `/api/series/genre/${genre}`
+  };
+  const { data } = await axios.request(options);
+  console.log('filtered series:', data);
+  return data;
+};
+
 export const createSeries = async (content) => {
   const options = {
     method: 'POST',
