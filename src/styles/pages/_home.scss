@@ -1,9 +1,64 @@
 .home {
+  margin-bottom: 0;
 
+  &__content {
+    display: flex;
+  }
+
+  // SEARCH & FILTER CONTROLS
+  &__controls {
+    position: fixed;
+    border: 2px solid orange;
+    margin: 3rem 0 0 2rem;
+  }
+  
+  &__filters {
+    border: 2px solid yellow;
+    max-width: 29rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  &__filter {
+    border: 2px solid $theme-midnight-blue;
+    margin: .5rem;
+    width: 13rem;
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 10px;
+  }
+
+  &__search-bar {
+    font-family: inherit;
+    padding: 1rem 2rem;
+    // height: 10rem;
+    width: 29rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+  }
+
+  // SERIES CARDS
   &__catalogue {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border: 2px solid limegreen;
+    margin-left: 30rem;
+    height: calc(100vh - 15rem);
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: rgba($theme-white, .5);
+      // background-color: white;
+    }
   }
 
   &__series-card {
