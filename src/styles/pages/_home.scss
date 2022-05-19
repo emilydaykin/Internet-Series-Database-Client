@@ -8,14 +8,31 @@
   // SEARCH & FILTER CONTROLS
   &__controls {
     position: fixed;
-    border: 2px solid orange;
+    // border: 2px solid orange;
     margin: 3rem 0 0 2rem;
+    align-self: center;
+  }
+
+  &__search-bar {
+    font-family: inherit;
+    padding: 1rem 1.5rem;
+    // height: 10rem;
+    width: 29rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
   }
   
-  &__filters {
-    border: 2px solid yellow;
-    max-width: 29rem;
+  &__controls-heading {
+    // border: 2px solid pink;
     margin-top: 2rem;
+    text-align: center;
+    color: $theme-grey;
+  }
+
+  &__filters {
+    // border: 2px solid yellow;
+    max-width: 29rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -24,20 +41,23 @@
   &__filter {
     border: 2px solid $theme-midnight-blue;
     margin: .5rem;
-    width: 13rem;
+    width: 11.5rem;
     text-align: center;
-    padding: 1rem 0;
+    padding: .75rem 0;
     border-radius: 10px;
-  }
+    font-size: 1.4rem;
+    color: $theme-grey;
 
-  &__search-bar {
-    font-family: inherit;
-    padding: 1rem 2rem;
-    // height: 10rem;
-    width: 29rem;
-    font-size: 1.2rem;
-    border-radius: 10px;
-    border: none;
+    &:hover {
+      color: $theme-midnight-blue;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $theme-midnight-blue;
+      color: $theme-white;
+      font-weight: 600;
+    }
   }
 
   // SERIES CARDS
@@ -45,7 +65,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 2px solid limegreen;
+    // border: 2px solid limegreen;
     margin-left: 30rem;
     height: calc(100vh - 15rem);
     overflow-y: scroll;
@@ -56,7 +76,7 @@
   
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: rgba($theme-white, .5);
+      background-color: rgba($theme-grey, .6);
       // background-color: white;
     }
   }

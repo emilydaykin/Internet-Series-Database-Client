@@ -36,8 +36,9 @@ const Home = () => {
           <input
             type='text'
             className='home__search-bar'
-            placeholder='Search (title, actor, plot, year, rating, genre)'
+            placeholder={'Search title, actor, plot, year, rating, genre'}
           />
+          <p className='home__controls-heading'>Filter By Genre:</p>
           {uniqueGenres.length !== 0 ? (
             <div className='home__filters'>
               {uniqueGenres.map((genre) => (
