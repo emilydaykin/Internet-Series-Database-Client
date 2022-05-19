@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSeriesById, createComment, deleteComment } from '../api/series';
+import { getSeriesBySearchTerm, createComment, deleteComment } from '../api/series';
 import { getLoggedInUser } from '../lib/auth';
 
 const ShowSeries = () => {
@@ -12,7 +12,7 @@ const ShowSeries = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const show = await getSeriesById(id);
+      const show = await getSeriesBySearchTerm(id);
       console.log('show', show);
       setSeries(show);
     };

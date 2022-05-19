@@ -9,10 +9,10 @@ export const getAllSeries = async () => {
   return data;
 };
 
-export const getSeriesById = async (id) => {
+export const getSeriesBySearchTerm = async (searchTerm) => {
   const options = {
     method: 'GET',
-    url: `/api/series/${id}`
+    url: `/api/series/${searchTerm}`
   };
   const { data } = await axios.request(options);
   return data;
