@@ -46,6 +46,11 @@ const Home = () => {
 
   console.log('filtersChosen:', filtersChosen);
 
+  const clearFilter = (e) => {
+    setFiltersChosen([]);
+    console.log(e);
+  };
+
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
       return `${text.slice(0, maxLength - 1)}...`;
@@ -78,7 +83,15 @@ const Home = () => {
               className='home__search-bar'
               placeholder={'Search title, actor, plot, year, rating, genre'}
             />
-            <p className='home__controls-heading'>Filter By Genre:</p>
+            <p className='home__controls-heading'>
+              {filtersChosen.length > 0 ? (
+                <button className='home__clear-filter' onClick={clearFilter}>
+                  Clear Filter
+                </button>
+              ) : (
+                'Filter By Genre:'
+              )}
+            </p>
             {uniqueGenres.length !== 0 ? (
               <div className='home__filters'>
                 {uniqueGenres.map((genre) => (
