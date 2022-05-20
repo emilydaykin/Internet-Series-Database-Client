@@ -102,7 +102,19 @@ const Home = () => {
             <p className='home__empty-catalogue'>Loading series...</p>
           ) : series.length == 0 ? (
             <p className='home__empty-catalogue'>
-              No series matching your combination of genres. Please try another search.
+              No series matching a genre combination of{' '}
+              {filtersChosen
+                .map((genre) => {
+                  const genreTitleCase =
+                    genre.slice(0, 1).toUpperCase() + genre.slice(1, genre.length);
+                  if (genre === filtersChosen[filtersChosen.length - 1]) {
+                    return ` and ${genreTitleCase}`;
+                  } else {
+                    return genreTitleCase;
+                  }
+                })
+                .join(', ')}
+              . <br /> Please try another search.
             </p>
           ) : (
             series.map((show) => (
