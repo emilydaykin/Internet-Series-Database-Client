@@ -7,6 +7,7 @@ const Home = () => {
   const [series, setSeries] = useState(null);
   const [uniqueGenres, setUniqueGenres] = useState([]);
   const [showControls, setShowControls] = useState(true);
+  const [filtersChosen, setFiltersChosen] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -32,6 +33,21 @@ const Home = () => {
     console.log('clicked');
     setShowControls(!showControls);
   };
+
+  const selectFilter = (e) => {
+    console.log(e.target.classList);
+    console.log(e.target.innerText);
+    const genreChosen = e.target.innerText.toLowerCase();
+    if (!filtersChosen.includes(genreChosen)) {
+      setFiltersChosen([...filtersChosen, genreChosen]);
+    } else {
+      const genresLeft = filtersChosen.filter((genre) => genre !== genreChosen);
+      setFiltersChosen(genresLeft);
+    }
+    e.target.classList.toggle('home__filter--selected');
+  };
+
+  console.log('filtersChosen:', filtersChosen);
 
   return (
     <section className='home'>
@@ -61,7 +77,12 @@ const Home = () => {
             {uniqueGenres.length !== 0 ? (
               <div className='home__filters'>
                 {uniqueGenres.map((genre) => (
-                  <div key={genre} className='home__filter'>
+                  <div
+                    key={genre}
+                    className='home__filter'
+                    onClick={selectFilter}
+                    value={genre.toLowerCase()}
+                  >
                     {genre}
                   </div>
                 ))}
