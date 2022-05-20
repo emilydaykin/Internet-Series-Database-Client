@@ -7,33 +7,25 @@
 
   // SEARCH & FILTER CONTROLS
   &__controls-wrapper {
-    // position: fixed;
-    // border: 2px solid orange;
     margin: 2rem 0 0 2rem;
-    // padding-top: 2rem;
-    // padding-right: 2rem;
     align-self: center;
     position: relative;
-    // display: none;
-    // width: 0;
+    // position: fixed;
     transition: all 1s;
+    // border: 3px solid orange;
   }
 
   &__expand-controls {
     position: absolute;
     top: -1rem;
     right: -5.5rem;
-    // top: 0;
-    // left: -2rem;
     display: flex;
     align-items: center;
     writing-mode: vertical-rl;
     text-orientation: upright;
     text-transform: uppercase;
     color: $theme-grey;
-    // display: inline-block;
-    // vertical-align: middle;
-    border: 2px solid red; 
+    // border: 2px solid red; 
     
     p span {
       font-size: 3.5rem;
@@ -106,8 +98,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 2px solid limegreen;
-    margin-left: 5rem;
+    align-items: center;
+    // border: 2px solid limegreen;
+    margin-left: 6rem;
+    // margin-left: 30rem;
+    max-height: calc(100vh - 15rem);
     height: calc(100vh - 15rem);
     // position: relative;  // absolute controls relative to this
     overflow-y: scroll;
@@ -123,6 +118,11 @@
     }
   }
 
+  &__empty-catalogue {
+    margin: 7rem 5rem;
+    align-self: stretch;
+  }
+
   &__series-card {
     box-shadow: .1rem 0 1.7rem 1.2rem rgba($theme-midnight-blue, 0.9);
     border-radius: 2.5rem;
@@ -130,6 +130,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    // justify-content: center;
     text-align: center;
     padding: 2.5rem 3rem;
     margin: 3rem 3.5rem;

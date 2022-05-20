@@ -15,19 +15,18 @@ const Home = () => {
       console.log('all series:', allSeries);
       setSeries(allSeries);
       const allGenres = allSeries.map((series) => series.genre);
-      console.log('all genres:', allGenres.flat());
       setUniqueGenres([...new Set(allGenres.flat())]);
     };
     getData();
-
-    // const filterSeries = async () => {
-    //   const filteredSeries = await filterSeriesByGenre('crime');
-    // };
-    // filterSeries();
   }, []);
 
-  console.log('uniqueGenres:', uniqueGenres);
-  console.log('showControls:', showControls);
+  useEffect(() => {
+    const filterSeries = async () => {
+      const filteredSeries = await filterSeriesByGenre(filtersChosen);
+      setSeries(filteredSeries);
+    };
+    filterSeries();
+  }, [filtersChosen]);
 
   const handleExpand = () => {
     console.log('clicked');
@@ -35,8 +34,6 @@ const Home = () => {
   };
 
   const selectFilter = (e) => {
-    console.log(e.target.classList);
-    console.log(e.target.innerText);
     const genreChosen = e.target.innerText.toLowerCase();
     if (!filtersChosen.includes(genreChosen)) {
       setFiltersChosen([...filtersChosen, genreChosen]);
@@ -48,6 +45,14 @@ const Home = () => {
   };
 
   console.log('filtersChosen:', filtersChosen);
+
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return `${text.slice(0, maxLength - 1)}...`;
+    } else {
+      return text;
+    }
+  };
 
   return (
     <section className='home'>
@@ -92,25 +97,29 @@ const Home = () => {
             )}
           </div>
         </div>
-        {series ? (
-          <div className='home__catalogue'>
-            {series.map((show) => (
+        <div className='home__catalogue'>
+          {!series ? (
+            <p className='home__empty-catalogue'>Loading series...</p>
+          ) : series.length == 0 ? (
+            <p className='home__empty-catalogue'>
+              No series matching your combination of genres. Please try another search.
+            </p>
+          ) : (
+            series.map((show) => (
               <div key={show._id} className='home__series-card'>
                 <Link className='home__series-link' to={`/series/${show._id}`}>
-                  <h2>{show.name}</h2>
+                  <h2>{truncateText(show.name, 23)}</h2>
                   <img
                     className='home__series-poster'
                     src={show.image}
                     alt={`${show.name} series poster`}
                   />
                 </Link>
-                <p>{show.description}</p>
+                <p>{truncateText(show.description, 100)}</p>
               </div>
-            ))}
-          </div>
-        ) : (
-          <p>Loading series...</p>
-        )}
+            ))
+          )}
+        </div>
       </div>
     </section>
   );
