@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const [series, setSeries] = useState(null);
   const [uniqueGenres, setUniqueGenres] = useState([]);
+  const [showControls, setShowControls] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -25,6 +26,12 @@ const Home = () => {
   }, []);
 
   console.log('uniqueGenres:', uniqueGenres);
+  console.log('showControls:', showControls);
+
+  const handleExpand = () => {
+    console.log('clicked');
+    setShowControls(!showControls);
+  };
 
   return (
     <section className='home'>
@@ -32,24 +39,37 @@ const Home = () => {
         <span>ISDb</span> Internet Series Database
       </h1>
       <div className='home__content'>
-        <div className='home__controls'>
-          <input
-            type='text'
-            className='home__search-bar'
-            placeholder={'Search title, actor, plot, year, rating, genre'}
-          />
-          <p className='home__controls-heading'>Filter By Genre:</p>
-          {uniqueGenres.length !== 0 ? (
-            <div className='home__filters'>
-              {uniqueGenres.map((genre) => (
-                <div key={genre} className='home__filter'>
-                  {genre}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p></p>
-          )}
+        <div className='home__controls-wrapper'>
+          <div className='home__expand-controls' onClick={handleExpand}>
+            {showControls ? (
+              <p>
+                <span>&laquo;</span>hide
+              </p>
+            ) : (
+              <p>
+                <span>&raquo;</span>search
+              </p>
+            )}
+          </div>
+          <div className={showControls ? 'home__controls' : 'u-collapse'}>
+            <input
+              type='text'
+              className='home__search-bar'
+              placeholder={'Search title, actor, plot, year, rating, genre'}
+            />
+            <p className='home__controls-heading'>Filter By Genre:</p>
+            {uniqueGenres.length !== 0 ? (
+              <div className='home__filters'>
+                {uniqueGenres.map((genre) => (
+                  <div key={genre} className='home__filter'>
+                    {genre}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p></p>
+            )}
+          </div>
         </div>
         {series ? (
           <div className='home__catalogue'>
