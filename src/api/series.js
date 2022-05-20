@@ -18,10 +18,11 @@ export const getSeriesBySearchTerm = async (searchTerm) => {
   return data;
 };
 
-export const filterSeriesByGenre = async (genre) => {
+export const filterSeriesByGenre = async (genreArray) => {
   const options = {
-    method: 'GET',
-    url: `/api/series/genre/${genre}`
+    method: 'POST',
+    url: '/api/series/genre/search',
+    data: { genres: genreArray }
   };
   const { data } = await axios.request(options);
   console.log('filtered series:', data);
