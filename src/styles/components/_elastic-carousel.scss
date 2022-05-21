@@ -68,6 +68,14 @@
   &:hover &__side--back {
     transform: rotateY(0);
     border: 4px solid $theme-midnight-blue;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: .5rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 1rem;
+      background-color: rgba($theme-grey, .6);
+    }
   }
 
   &__title {

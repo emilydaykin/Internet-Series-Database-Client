@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
 
-const ElasticCarousel = ({ faves }) => {
+const ElasticCarousel = ({ seriesList }) => {
   const responsiveBreakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2, itemsToScroll: 2 },
@@ -12,9 +12,9 @@ const ElasticCarousel = ({ faves }) => {
 
   return (
     <div className='carousel'>
-      {faves ? (
+      {seriesList ? (
         <Carousel breakPoints={responsiveBreakPoints}>
-          {faves.map((series) => (
+          {seriesList.map((series) => (
             <Link key={series._id} to={`/series/${series._id}`} className='card'>
               <div className='card__side card__side--front'>
                 <img src={series.image} alt={series.name} className='carousel__image' />
