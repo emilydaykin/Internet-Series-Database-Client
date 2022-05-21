@@ -1,0 +1,88 @@
+.carousel {
+  // border: 3px solid orange;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  // width: 80%; 
+
+  &__image {
+    border-radius: 7px;
+    border: 4px solid $theme-black;
+    transition: transform .3s;
+
+    &:hover {
+      border: 4px solid $theme-midnight-blue; 
+    }
+  }
+}
+
+// React-elastic-carousel's inbuilt classes:
+.rec-dot {
+  background-color: rgba($theme-midnight-blue, .4) !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  margin: 1rem !important;
+
+  &_active {
+    box-shadow: 0 0 .1rem .3rem $theme-midnight-blue !important;
+  }
+}
+
+.rec-arrow {
+  color: $theme-grey !important;
+
+  &:hover:enabled, 
+  &:focus:enabled {
+    background-color: $theme-midnight-blue !important;
+  }
+}
+
+.card {
+  text-decoration: none;
+  color: $theme-white;
+  font-size: 2rem;
+  perspective: 150rem;
+  
+  &__side {
+    transition: all .8s ease;
+    backface-visibility: hidden;
+    text-align: center;
+    position: relative;
+
+    &--back {
+      transform: rotateY(180deg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border: 4px solid $theme-midnight-blue;
+      border-radius: 7px;
+      padding: 1rem 1.5rem;
+      // display: flex;
+      // justify-content: center;
+    }
+  }
+
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0);
+    border: 4px solid $theme-midnight-blue;
+  }
+
+  &__title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  &__details {
+    margin: 1rem 0;
+
+    &--actors {
+      color: white;
+    }
+  }
+}
