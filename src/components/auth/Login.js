@@ -15,11 +15,15 @@ const Login = () => {
     setPasswordValue(e.target.value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log('submit clicked!');
-    loginUser({ email: emailValue, password: passwordValue });
-    navigate('/');
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault();
+      console.log('submit clicked!');
+      await loginUser({ email: emailValue, password: passwordValue });
+      navigate('/');
+    } catch (err) {
+      console.log('err.response', err.response);
+    }
   }
 
   return (
