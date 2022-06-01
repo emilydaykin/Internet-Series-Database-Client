@@ -7,12 +7,15 @@ const Login = () => {
   const navigate = useNavigate();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   function handleEmailChange(e) {
     setEmailValue(e.target.value);
+    setErrorMessage('');
   }
   function handlePasswordChange(e) {
     setPasswordValue(e.target.value);
+    setErrorMessage('');
   }
 
   async function handleSubmit(e) {
@@ -23,6 +26,7 @@ const Login = () => {
       navigate('/');
     } catch (err) {
       console.log('err.response', err.response);
+      setErrorMessage('Incorrect credentials.');
     }
   }
 
@@ -57,6 +61,7 @@ const Login = () => {
               onChange={handlePasswordChange}
             />
           </div>
+          <p className='form__error-message'>{errorMessage}</p>
           <button className='button'>Login</button>
         </form>
       </div>

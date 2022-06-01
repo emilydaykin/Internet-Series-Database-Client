@@ -35,4 +35,10 @@
     margin-top: .3rem;
     width: 25rem;
   }  
+
+  &__error-message {
+    text-align: center;
+    margin-top: .5rem;
+    color: $error-red;
+  }
 }
