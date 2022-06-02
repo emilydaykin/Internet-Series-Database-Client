@@ -15,6 +15,19 @@ export const loginUser = async (credentials) => {
     // if user has no token (so unauthorised user?)
     window.sessionStorage.remove('token');
   }
-  console.log('data:', data);
+  console.log('login data:', data);
   return data.message;
+};
+
+export const registerUser = async (userData) => {
+  const options = {
+    method: 'POST',
+    url: '/api/users',
+    data: userData
+  };
+
+  const { data } = await axios.request(options);
+
+  console.log('register data:', data);
+  return data;
 };
