@@ -26,7 +26,15 @@ const Login = () => {
       navigate('/');
     } catch (err) {
       console.log('err.response', err.response);
-      setErrorMessage('Incorrect credentials.');
+      if (emailValue === '' && passwordValue === '') {
+        setErrorMessage('Please enter your credentials.');
+      } else if (emailValue === '') {
+        setErrorMessage('Please enter your email');
+      } else if (passwordValue === '') {
+        setErrorMessage('Please enter your password');
+      } else {
+        setErrorMessage('Incorrect credentials.');
+      }
     }
   }
 

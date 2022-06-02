@@ -32,9 +32,25 @@ const Register = () => {
       });
       navigate('/login');
     } catch (err) {
-      // console.log('register err response message:', err.response.data.message);
-      // console.log('register err message:', err.message);
-      setErrorMessage(err.response.data.message);
+      console.log('formData', formData);
+      if (
+        formData.name === '' &&
+        formData.email === '' &&
+        formData.password === '' &&
+        formData.passwordConfirmation === ''
+      ) {
+        setErrorMessage('Please fill in the form.');
+      } else if (formData.name === '') {
+        setErrorMessage('Please fill in your name.');
+      } else if (formData.email === '') {
+        setErrorMessage('Please fill in your email.');
+      } else if (formData.password === '') {
+        setErrorMessage('Please fill in your password.');
+      } else if (formData.passwordConfirmation === '') {
+        setErrorMessage('Please confirm your password.');
+      } else {
+        setErrorMessage(err.response.data.message);
+      }
     }
   }
 
