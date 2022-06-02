@@ -32,9 +32,9 @@ const Register = () => {
       });
       navigate('/login');
     } catch (err) {
-      console.log('register err response message:', err.response.data.message);
-      console.log('register err message:', err.message);
-      setErrorMessage('invalid entries');
+      // console.log('register err response message:', err.response.data.message);
+      // console.log('register err message:', err.message);
+      setErrorMessage(err.response.data.message);
     }
   }
 
@@ -62,7 +62,7 @@ const Register = () => {
               Email
             </label>
             <input
-              type='text'
+              type='email'
               className='form__input'
               id='email'
               value={formData.email}
