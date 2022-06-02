@@ -1,28 +1,41 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import { loginUser } from '../../api/auth';
+import { registerUser } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     passwordConfirmation: ''
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   function handleChange(e) {
-    console.log('e.target.id', e.target.name);
+    setErrorMessage('');
+    console.log('e.target.id', e.target.id);
     console.log('e.target.value', e.target.value);
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log('submit clicked!');
-    // loginUser({ email: emailValue, password: passwordValue });
-    // navigate('/');
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault();
+      console.log('submit clicked!');
+      await registerUser({
+        username: formData.name,
+        email: formData.email,
+        password: formData.password,
+        passwordConfirmation: formData.passwordConfirmation
+      });
+      navigate('/login');
+    } catch (err) {
+      console.log('register err response message:', err.response.data.message);
+      console.log('register err message:', err.message);
+      setErrorMessage('invalid entries');
+    }
   }
 
   return (
@@ -80,6 +93,7 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
+          <p className='form__error-message'>{errorMessage}</p>
           <button className='button'>Register</button>
         </form>
       </div>
