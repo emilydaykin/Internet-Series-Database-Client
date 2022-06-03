@@ -29,9 +29,9 @@ const Login = () => {
       if (emailValue === '' && passwordValue === '') {
         setErrorMessage('Please enter your credentials.');
       } else if (emailValue === '') {
-        setErrorMessage('Please enter your email');
+        setErrorMessage('Please enter your email.');
       } else if (passwordValue === '') {
-        setErrorMessage('Please enter your password');
+        setErrorMessage('Please enter your password.');
       } else {
         setErrorMessage('Incorrect credentials.');
       }
@@ -69,7 +69,11 @@ const Login = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          <p className='form__error-message'>{errorMessage}</p>
+          {errorMessage && (
+            <p className='form__error-message' role='error-message'>
+              {errorMessage}
+            </p>
+          )}
           <button className='button'>Login</button>
         </form>
       </div>
