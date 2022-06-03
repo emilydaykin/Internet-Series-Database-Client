@@ -8,7 +8,9 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
 - Back End: Node, MongoDB, Mongoose, Express, Python
 - Data Collection: Web scraping with Python
 - Authentication: JSON Web Token (JWT)
-- ??? Testing: jest??, testing-library, mocha/chai/supertest?
+- Testing: 
+  - Front end: Jest for mocks, React Testing Library
+  - Back End: ¿mocha/chai/supertest???
 - Other Packages & Tools: Postman, MongoDB Compass, Axios, Elastic Carousel
 - Deployment: Netlify (FE), and Heroku & Mongo Atlas (BE)
 
