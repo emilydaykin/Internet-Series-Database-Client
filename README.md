@@ -18,6 +18,20 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
 - screenshots
 ## Mobile App
 
+# Installation:
+- Live demo here
+- Run and test locally:
+  - Back End:
+    1. Clone the [backend repo](https://github.com/emilydaykin/Internet-Series-Database-API)
+    2. Run MongoDB locally
+    3. `npm i` 
+    4. `npm run start:server`
+  - Front End: 
+    1. Clone this repo
+    2. `npm i`
+    3. `npm run test` (XX test suits and XX tests)
+    4. `npm run start:client`
+
 # Features
 - Display of all series (XX were pre-seeded via scraping IMDb)
 - An expand-collapse search and filter tool for the series catalogue.
@@ -36,7 +50,7 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
 # Architecture
 - Secure routing
 - how many model schemas
-- unit & integration testing???
+- unit & integration testing???  (XX test suits and XX tests)
 
 # Data Collection
 Python script to scrape IMDb
