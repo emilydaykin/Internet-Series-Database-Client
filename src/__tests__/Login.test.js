@@ -1,14 +1,17 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
+import { BrowserRouter } from 'react-router-dom';
 import Login from '../components/auth/Login';
 
 const mockUser = {
   email: 'mock@user.com',
   password: 'mockPassword1!'
 };
+
+// jest.mock('axios');
+afterEach(cleanup);
 
 test('Assert user inputs are accepted and displayed correctly', () => {
   // Login (since it contains useNavigate) must be wrapped in BrowserRouter
@@ -63,8 +66,10 @@ test('Assert input values are correctly sent as a post request to API upon submi
   await waitFor(() => expect(axios.post).toHaveBeenCalled());
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 
+  // console.log('============ axios.post', axios.post);
+  await waitFor(() => console.log('============ axios.post.mock', axios.post.mock));
+
   // expect(axios.post).toBeCalledWith('http://localhost:8001/api/login', mockUser);
-  // expect(axios.post).toHaveBeenCalledWith('http://localhost:8001/api/login', mockUser);
 });
 
 test('Assert error message displayed when incorrect credentials are provided', async () => {
@@ -90,7 +95,6 @@ test('Assert error message displayed when incorrect credentials are provided', a
   await waitFor(() => expect(axios.post).toHaveBeenCalled());
 
   const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
-  console.log('errorMessage', errorMessage);
 
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage).toHaveTextContent('Incorrect credentials.');
