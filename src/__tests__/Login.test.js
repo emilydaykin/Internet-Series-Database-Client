@@ -17,15 +17,23 @@ test('Accept user input and display it correctly', () => {
     </BrowserRouter>
   );
 
-  // Get the login form's email input element:
+  // Get the login form's input elements:
   const emailInput = screen.getByLabelText('Email');
+  const passwordInput = screen.getByLabelText('Password');
+
+  // Get the form's button element with a (case-insensitive) classname of 'button'
+  const submitButton = screen.getByRole('button', { className: /button/i });
 
   // .toBeInTheDocument() comes from `jest-dom`
   expect(emailInput).toBeInTheDocument();
+  expect(passwordInput).toBeInTheDocument();
+  expect(submitButton).toBeInTheDocument();
 
-  // simulate user typing in email to form's email field:
+  // simulate user typing in email & pw to form's input fields:
   userEvent.type(emailInput, mockUser.email);
+  userEvent.type(passwordInput, mockUser.password);
 
   // emailInput.value is from emailInput.pendingProps.value
   expect(emailInput.value).toEqual(mockUser.email);
+  expect(passwordInput.value).toEqual(mockUser.password);
 });
