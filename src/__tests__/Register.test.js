@@ -114,3 +114,69 @@ test('Assert empty form error if form is blank', async () => {
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage).toHaveTextContent('Please fill in the form.');
 });
+
+test('Assert empty email field error if blank', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { nameInput, passwordInput, passwordConfirmationInput, submitButton } = getInputFields();
+
+  userEvent.type(nameInput, mockUser.username);
+  userEvent.type(passwordInput, mockUser.password);
+  userEvent.type(passwordConfirmationInput, mockUser.passwordConfirmation);
+  userEvent.click(submitButton);
+
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+
+  expect(errorMessage).toBeInTheDocument();
+  expect(errorMessage).toHaveTextContent('Please fill in your email.');
+});
+
+test('Assert empty password field error if password blank', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { nameInput, emailInput, submitButton } = getInputFields();
+
+  userEvent.type(nameInput, mockUser.username);
+  userEvent.type(emailInput, mockUser.email);
+  userEvent.click(submitButton);
+
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+  console.log(errorMessage);
+
+  expect(errorMessage).toBeInTheDocument();
+  expect(errorMessage).toHaveTextContent('Please fill in your password.');
+});
+
+test('Assert password confirmation error if password is not confirmed', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { nameInput, emailInput, passwordInput, submitButton } = getInputFields();
+
+  userEvent.type(nameInput, mockUser.username);
+  userEvent.type(emailInput, mockUser.email);
+  userEvent.type(passwordInput, mockUser.password);
+  userEvent.click(submitButton);
+
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+
+  expect(errorMessage).toBeInTheDocument();
+  expect(errorMessage).toHaveTextContent('Please confirm your password.');
+});
