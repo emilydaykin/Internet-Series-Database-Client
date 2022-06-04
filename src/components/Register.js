@@ -15,15 +15,15 @@ const Register = () => {
 
   function handleChange(e) {
     setErrorMessage('');
-    console.log('e.target.id', e.target.id);
-    console.log('e.target.value', e.target.value);
+    // console.log('e.target.id', e.target.id);
+    // console.log('e.target.value', e.target.value);
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
 
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      console.log('submit clicked!');
+      console.log('register submit clicked!');
       await registerUser({
         username: formData.name,
         email: formData.email,
@@ -32,7 +32,7 @@ const Register = () => {
       });
       navigate('/login');
     } catch (err) {
-      console.log('formData', formData);
+      // console.log('formData', formData);
       if (
         formData.name === '' &&
         formData.email === '' &&
@@ -49,7 +49,10 @@ const Register = () => {
       } else if (formData.passwordConfirmation === '') {
         setErrorMessage('Please confirm your password.');
       } else {
-        setErrorMessage(err.response.data.message);
+        // setErrorMessage(err.response.data.message);
+        // console.log('err', err);
+        console.log('err.response', err.response);
+        // setErrorMessage(`Error: ${err.response}`);
       }
     }
   }
