@@ -49,10 +49,14 @@ const Register = () => {
       } else if (formData.passwordConfirmation === '') {
         setErrorMessage('Please confirm your password.');
       } else {
-        // setErrorMessage(err.response.data.message);
-        // console.log('err', err);
-        console.log('err.response', err.response);
-        // setErrorMessage(`Error: ${err.response}`);
+        if (err.response) {
+          console.log('err.response.data.message', err.response.data.message);
+          setErrorMessage(err.response.data.message);
+        } else {
+          // console.log('err', err);
+          console.log('err.response', err.response);
+          // setErrorMessage(`Error: ${err.response}`);
+        }
       }
     }
   }
@@ -112,7 +116,11 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          {errorMessage && <p className='form__error-message'>{errorMessage}</p>}
+          {errorMessage && (
+            <p className='form__error-message' role='error-message'>
+              {errorMessage}
+            </p>
+          )}
           <button className='button'>Register</button>
         </form>
       </div>
