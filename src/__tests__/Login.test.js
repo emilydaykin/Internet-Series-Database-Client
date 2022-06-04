@@ -10,7 +10,7 @@ const mockUser = {
   password: 'mockPassword1!'
 };
 
-// afterEach(cleanup);
+afterEach(cleanup);
 
 test('Assert that no error message is displayed upon initial render', () => {
   render(

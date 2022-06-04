@@ -21,11 +21,11 @@ const Login = () => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      console.log('submit clicked!');
+      console.log('login submit clicked!');
       await loginUser({ email: emailValue, password: passwordValue });
       navigate('/');
     } catch (err) {
-      console.log('err.response', err.response);
+      // console.log('err.response', err.response);
       if (emailValue === '' && passwordValue === '') {
         setErrorMessage('Please enter your credentials.');
       } else if (emailValue === '') {

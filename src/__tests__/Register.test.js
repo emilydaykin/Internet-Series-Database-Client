@@ -12,14 +12,28 @@ const mockUser = {
   passwordConfirmation: 'mockPassword1!'
 };
 
-afterEach(cleanup);
-
-test('Assert no error messages are displayed upon initial render', () => {
+const renderRegisterComponent = () => {
   render(
     <BrowserRouter>
       <Register />
     </BrowserRouter>
   );
+};
+
+const getInputFields = () => {
+  const nameInput = screen.getByLabelText('Name');
+  const emailInput = screen.getByLabelText('Email');
+  const passwordInput = screen.getByLabelText('Password');
+  const passwordConfirmationInput = screen.getByLabelText('Password Confirmation');
+  const submitButton = screen.getByRole('button', { className: /button/i });
+
+  return { nameInput, emailInput, passwordInput, passwordConfirmationInput, submitButton };
+};
+
+afterEach(cleanup);
+
+test('Assert no error messages are displayed upon initial render', () => {
+  renderRegisterComponent();
 
   // Get text of all possible error messages:
   const errorMessageFormNotFilled = screen.queryByText('Please fill in the form.');
@@ -41,17 +55,10 @@ test('Assert no error messages are displayed upon initial render', () => {
 });
 
 test('Assert user inputs are accepted and displayed correctly', () => {
-  render(
-    <BrowserRouter>
-      <Register />
-    </BrowserRouter>
-  );
+  renderRegisterComponent();
 
-  const nameInput = screen.getByLabelText('Name');
-  const emailInput = screen.getByLabelText('Email');
-  const passwordInput = screen.getByLabelText('Password');
-  const passwordConfirmationInput = screen.getByLabelText('Password Confirmation');
-  const submitButton = screen.getByRole('button', { className: /button/i });
+  const { nameInput, emailInput, passwordInput, passwordConfirmationInput, submitButton } =
+    getInputFields();
 
   expect(nameInput).toBeInTheDocument();
   expect(emailInput).toBeInTheDocument();
@@ -74,17 +81,10 @@ test('Assert input values are correctly sent as a post request to API upon submi
   axios.post = jest.fn();
   axios.post();
 
-  render(
-    <BrowserRouter>
-      <Register />
-    </BrowserRouter>
-  );
+  renderRegisterComponent();
 
-  const nameInput = screen.getByLabelText('Name');
-  const emailInput = screen.getByLabelText('Email');
-  const passwordInput = screen.getByLabelText('Password');
-  const passwordConfirmationInput = screen.getByLabelText('Password Confirmation');
-  const submitButton = screen.getByRole('button', { className: /button/i });
+  const { nameInput, emailInput, passwordInput, passwordConfirmationInput, submitButton } =
+    getInputFields();
 
   userEvent.type(nameInput, mockUser.username);
   userEvent.type(emailInput, mockUser.email);
@@ -94,4 +94,23 @@ test('Assert input values are correctly sent as a post request to API upon submi
 
   await waitFor(() => expect(axios.post).toHaveBeenCalled());
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+});
+
+test('Assert empty form error if form is blank', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { submitButton } = getInputFields();
+
+  userEvent.click(submitButton);
+
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+
+  expect(errorMessage).toBeInTheDocument();
+  expect(errorMessage).toHaveTextContent('Please fill in the form.');
 });
