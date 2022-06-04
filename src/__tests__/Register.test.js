@@ -96,6 +96,8 @@ test('Assert input values are correctly sent as a post request to API upon submi
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 });
 
+// ------------------------ Front end error messages ------------------------ //
+
 test('Assert empty form error if form is blank', async () => {
   axios.post = jest.fn();
   axios.post();
@@ -153,7 +155,6 @@ test('Assert empty password field error if password blank', async () => {
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 
   const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
-  console.log(errorMessage);
 
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage).toHaveTextContent('Please fill in your password.');
@@ -179,4 +180,38 @@ test('Assert password confirmation error if password is not confirmed', async ()
 
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage).toHaveTextContent('Please confirm your password.');
+});
+
+// ------------------------ Back end error messages ------------------------ //
+
+test('Assert non-unique username error if username is taken', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { nameInput, emailInput, passwordInput, passwordConfirmationInput, submitButton } =
+    getInputFields();
+
+  userEvent.type(nameInput, 'admin');
+  userEvent.type(emailInput, mockUser.email);
+  userEvent.type(passwordInput, mockUser.password);
+  userEvent.type(passwordConfirmationInput, mockUser.passwordConfirmation);
+  userEvent.click(submitButton);
+
+  console.log('NAME:', nameInput.value);
+  console.log('EMAIL:', emailInput.value);
+  console.log('PASSWORD:', passwordInput.value);
+  console.log('PASSWORD CONF:', passwordConfirmationInput.value);
+
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+  console.log('errorMessage', errorMessage);
+
+  expect(errorMessage).toBeInTheDocument();
+
+  // Very hacky..
+  expect(errorMessage).toHaveTextContent('Undefined error message (from backend).');
 });
