@@ -71,3 +71,11 @@ test('Assert loading state then series catalogue displayed upon initial render',
     expect(seriesCard).toBeInTheDocument();
   });
 });
+
+test('Assert loading state rendered then display error message on failed response', () => {});
+
+test('Assert search bar input is accepted and displayed correctly', () => {});
+
+test('Assert filter works', () => {});
+
+test('Assert collapability of search and filter controls when user clicks "hide"', () => {});
