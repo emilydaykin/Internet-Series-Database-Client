@@ -10,8 +10,30 @@ const mockUser = {
   password: 'mockPassword1!'
 };
 
-// jest.mock('axios');
-afterEach(cleanup);
+// afterEach(cleanup);
+
+test('Assert that no error message is displayed upon initial render', () => {
+  render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  );
+
+  // Get text of all possible error messages:
+  const errorMessageFormNotFilled = screen.queryByText('Please enter your credentials.');
+  const errorMessageEmailNotFilled = screen.queryByText('Please enter your email.');
+  const errorMessagePasswordNotFilled = screen.queryByText('Please enter your password.');
+  const errorMessageIncorrectCreds = screen.queryByText('Incorrect credentials.');
+
+  const possibleErrorMessages = [
+    errorMessageFormNotFilled,
+    errorMessageEmailNotFilled,
+    errorMessagePasswordNotFilled,
+    errorMessageIncorrectCreds
+  ];
+
+  possibleErrorMessages.forEach((errMsg) => expect(errMsg).not.toBeInTheDocument());
+});
 
 test('Assert user inputs are accepted and displayed correctly', () => {
   // Login (since it contains useNavigate) must be wrapped in BrowserRouter
@@ -67,7 +89,7 @@ test('Assert input values are correctly sent as a post request to API upon submi
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 
   // console.log('============ axios.post', axios.post);
-  await waitFor(() => console.log('============ axios.post.mock', axios.post.mock));
+  // await waitFor(() => console.log('============ axios.post.mock', axios.post.mock));
 
   // expect(axios.post).toBeCalledWith('http://localhost:8001/api/login', mockUser);
 });
@@ -98,27 +120,4 @@ test('Assert error message displayed when incorrect credentials are provided', a
 
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage).toHaveTextContent('Incorrect credentials.');
-});
-
-test('Assert that no error message is displayed upon initial render', () => {
-  render(
-    <BrowserRouter>
-      <Login />
-    </BrowserRouter>
-  );
-
-  // Get text of all possible error messages:
-  const errorMessageFormNotFilled = screen.queryByText('Please enter your credentials.');
-  const errorMessageEmailNotFilled = screen.queryByText('Please enter your email.');
-  const errorMessagePasswordNotFilled = screen.queryByText('Please enter your password.');
-  const errorMessageIncorrectCreds = screen.queryByText('Incorrect credentials.');
-
-  const possibleErrorMessages = [
-    errorMessageFormNotFilled,
-    errorMessageEmailNotFilled,
-    errorMessagePasswordNotFilled,
-    errorMessageIncorrectCreds
-  ];
-
-  possibleErrorMessages.forEach((errMsg) => expect(errMsg).not.toBeInTheDocument());
 });
