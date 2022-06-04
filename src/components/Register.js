@@ -59,7 +59,6 @@ const Register = () => {
           // VERY HACKY (this makes the test pass and won't appear to user)
           setErrorMessage('Undefined error message (from backend).');
         }
-        console.log('pass');
       }
     }
   }

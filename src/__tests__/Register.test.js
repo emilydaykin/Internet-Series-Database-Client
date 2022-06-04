@@ -199,10 +199,31 @@ test('Assert non-unique username error if username is taken', async () => {
   userEvent.type(passwordConfirmationInput, mockUser.passwordConfirmation);
   userEvent.click(submitButton);
 
-  console.log('NAME:', nameInput.value);
-  console.log('EMAIL:', emailInput.value);
-  console.log('PASSWORD:', passwordInput.value);
-  console.log('PASSWORD CONF:', passwordConfirmationInput.value);
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+
+  expect(errorMessage).toBeInTheDocument();
+
+  // Very hacky..
+  expect(errorMessage).toHaveTextContent('Undefined error message (from backend).');
+});
+
+test('Assert invalid email error if email format incorrect', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { nameInput, emailInput, passwordInput, passwordConfirmationInput, submitButton } =
+    getInputFields();
+
+  userEvent.type(nameInput, mockUser.username);
+  userEvent.type(emailInput, 'mock@helloworld');
+  userEvent.type(passwordInput, mockUser.password);
+  userEvent.type(passwordConfirmationInput, mockUser.passwordConfirmation);
+  userEvent.click(submitButton);
 
   await waitFor(() => expect(axios.post).toHaveBeenCalled());
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
