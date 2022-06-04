@@ -229,6 +229,32 @@ test('Assert invalid email error if email format incorrect', async () => {
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 
   const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
+
+  expect(errorMessage).toBeInTheDocument();
+
+  // Very hacky..
+  expect(errorMessage).toHaveTextContent('Undefined error message (from backend).');
+});
+
+test('Assert invalid password error if password does not meet criteria', async () => {
+  axios.post = jest.fn();
+  axios.post();
+
+  renderRegisterComponent();
+
+  const { nameInput, emailInput, passwordInput, passwordConfirmationInput, submitButton } =
+    getInputFields();
+
+  userEvent.type(nameInput, mockUser.username);
+  userEvent.type(emailInput, mockUser.email);
+  userEvent.type(passwordInput, '12345');
+  userEvent.type(passwordConfirmationInput, '12345');
+  userEvent.click(submitButton);
+
+  await waitFor(() => expect(axios.post).toHaveBeenCalled());
+  await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
   console.log('errorMessage', errorMessage);
 
   expect(errorMessage).toBeInTheDocument();
