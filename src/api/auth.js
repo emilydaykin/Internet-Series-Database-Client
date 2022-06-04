@@ -16,14 +16,9 @@ export const loginUser = async (credentials) => {
 };
 
 export const registerUser = async (userData) => {
-  const options = {
-    method: 'POST',
-    url: '/api/users',
-    data: userData
-  };
+  const response = axios.post('/api/users', userData);
 
-  const { data } = await axios.request(options);
+  const { data } = await response;
 
-  console.log('register data:', data);
   return data;
 };

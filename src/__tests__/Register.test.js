@@ -79,7 +79,6 @@ test('Assert user inputs are accepted and displayed correctly', () => {
 
 test('Assert input values are correctly sent as a post request to API upon submit', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -94,13 +93,14 @@ test('Assert input values are correctly sent as a post request to API upon submi
 
   await waitFor(() => expect(axios.post).toHaveBeenCalled());
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
+
+  expect(axios.post).toBeCalledWith('/api/users', mockUser);
 });
 
 // ------------------------ Front end error messages ------------------------ //
 
 test('Assert empty form error if form is blank', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -119,7 +119,6 @@ test('Assert empty form error if form is blank', async () => {
 
 test('Assert empty email field error if blank', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -141,7 +140,6 @@ test('Assert empty email field error if blank', async () => {
 
 test('Assert empty password field error if password blank', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -162,7 +160,6 @@ test('Assert empty password field error if password blank', async () => {
 
 test('Assert password confirmation error if password is not confirmed', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -186,7 +183,6 @@ test('Assert password confirmation error if password is not confirmed', async ()
 
 test('Assert non-unique username error if username is taken', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -212,7 +208,6 @@ test('Assert non-unique username error if username is taken', async () => {
 
 test('Assert invalid email error if email format incorrect', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -238,7 +233,6 @@ test('Assert invalid email error if email format incorrect', async () => {
 
 test('Assert invalid password error if password does not meet criteria', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -264,7 +258,6 @@ test('Assert invalid password error if password does not meet criteria', async (
 
 test('Assert passwords not matching', async () => {
   axios.post = jest.fn();
-  axios.post();
 
   renderRegisterComponent();
 
@@ -281,7 +274,6 @@ test('Assert passwords not matching', async () => {
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 
   const errorMessage = screen.getByRole('error-message', { className: /form__error-message/i });
-  console.log('errorMessage', errorMessage);
 
   expect(errorMessage).toBeInTheDocument();
 
