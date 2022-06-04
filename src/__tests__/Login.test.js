@@ -67,8 +67,6 @@ test('Assert user inputs are accepted and displayed correctly', () => {
 test('Assert input values are correctly sent as a post request to API upon submit', async () => {
   // Initialise the value of axios.post by creating a mock
   axios.post = jest.fn();
-  axios.post();
-  // axios.post.mockResolvedValueOnce();
 
   render(
     <BrowserRouter>
@@ -88,10 +86,7 @@ test('Assert input values are correctly sent as a post request to API upon submi
   await waitFor(() => expect(axios.post).toHaveBeenCalled());
   await waitFor(() => expect(axios.post).toBeCalledTimes(1));
 
-  // console.log('============ axios.post', axios.post);
-  // await waitFor(() => console.log('============ axios.post.mock', axios.post.mock));
-
-  // expect(axios.post).toBeCalledWith('http://localhost:8001/api/login', mockUser);
+  expect(axios.post).toBeCalledWith('/api/login', mockUser);
 });
 
 test('Assert error message displayed when incorrect credentials are provided', async () => {

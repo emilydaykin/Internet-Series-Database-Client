@@ -1,13 +1,9 @@
 import axios from 'axios';
 
 export const loginUser = async (credentials) => {
-  const options = {
-    method: 'POST',
-    url: '/api/login',
-    data: credentials // `data`! not body!!
-  };
+  const response = axios.post('/api/login', credentials);
 
-  const { data } = await axios.request(options);
+  const { data } = await response;
 
   if (data.token) {
     window.sessionStorage.setItem('token', data.token);
@@ -15,8 +11,8 @@ export const loginUser = async (credentials) => {
     // if user has no token (so unauthorised user?)
     window.sessionStorage.remove('token');
   }
-  console.log('login data:', data);
-  return data.message;
+
+  return response;
 };
 
 export const registerUser = async (userData) => {
