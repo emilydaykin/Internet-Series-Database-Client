@@ -109,7 +109,7 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          <p className='form__error-message'>{errorMessage}</p>
+          {errorMessage && <p className='form__error-message'>{errorMessage}</p>}
           <button className='button'>Register</button>
         </form>
       </div>
