@@ -14,8 +14,8 @@ const UserProfile = () => {
   useEffect(() => {
     const getData = async () => {
       const allSeries = await getAllSeries();
-      setAllSeries(allSeries);
-      setFavourites(allSeries.slice(10, 30));
+      setAllSeries(allSeries.data);
+      setFavourites(allSeries.data.slice(10, 30));
     };
     getData();
   }, []);

@@ -11,19 +11,29 @@ const Home = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const allSeries = await getAllSeries();
-      console.log('all series:', allSeries);
-      setSeries(allSeries);
-      const allGenres = allSeries.map((series) => series.genre);
-      setUniqueGenres([...new Set(allGenres.flat())]);
+      try {
+        const allSeries = await getAllSeries();
+        console.log('all series:', allSeries);
+        setSeries(allSeries.data);
+        const allGenres = allSeries.data.map((series) => series.genre);
+        setUniqueGenres([...new Set(allGenres.flat())]);
+      } catch (err) {
+        console.log('useEffect getData error');
+        // console.log('useEffect getData error', err);
+      }
     };
     getData();
   }, []);
 
   useEffect(() => {
     const filterSeries = async () => {
-      const filteredSeries = await filterSeriesByGenre(filtersChosen);
-      setSeries(filteredSeries);
+      try {
+        const filteredSeries = await filterSeriesByGenre(filtersChosen);
+        setSeries(filteredSeries);
+      } catch (err) {
+        console.log('useEffect filterSeries error');
+        // console.log('useEffect filterSeries error', err);
+      }
     };
     filterSeries();
   }, [filtersChosen]);
@@ -112,7 +122,9 @@ const Home = () => {
         </div>
         <div className='home__catalogue'>
           {!series ? (
-            <p className='home__empty-catalogue'>Loading series...</p>
+            <p className='home__empty-catalogue' role='loading'>
+              Loading series...
+            </p>
           ) : series.length == 0 ? (
             <p className='home__empty-catalogue'>
               No series matching a genre combination of{' '}

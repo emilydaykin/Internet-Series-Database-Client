@@ -1,12 +1,7 @@
 import axios from 'axios';
 
 export const getAllSeries = async () => {
-  const options = {
-    method: 'GET',
-    url: '/api/series'
-  };
-  const { data } = await axios.request(options);
-  return data;
+  return axios.get('/api/series');
 };
 
 export const getSeriesBySearchTerm = async (searchTerm) => {
