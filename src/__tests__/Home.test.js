@@ -61,7 +61,6 @@ test('Assert loading state then series catalogue displayed upon initial render',
   );
 
   const loadingState = screen.getByRole('loading');
-
   expect(loadingState).toBeInTheDocument();
 
   await waitFor(() => expect(axios.get).toHaveBeenCalled());
@@ -72,7 +71,25 @@ test('Assert loading state then series catalogue displayed upon initial render',
   });
 });
 
-test('Assert loading state rendered then display error message on failed response', () => {});
+test('Assert loading state rendered then display error message on failed response', async () => {
+  axios.get = jest.fn();
+  axios.get.mockRejectedValueOnce();
+
+  render(
+    <BrowserRouter>
+      <Home />
+    </BrowserRouter>
+  );
+
+  const loadingState = screen.getByRole('loading');
+  expect(loadingState).toBeInTheDocument();
+
+  await waitFor(() => expect(axios.get).toHaveBeenCalled());
+
+  const errorMessage = screen.getByRole('error-message');
+  expect(errorMessage).toBeInTheDocument();
+  expect(errorMessage).toHaveTextContent('Oh no! Something went wrong fetching all series...');
+});
 
 test('Assert search bar input is accepted and displayed correctly', () => {});
 

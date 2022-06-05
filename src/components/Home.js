@@ -8,6 +8,7 @@ const Home = () => {
   const [uniqueGenres, setUniqueGenres] = useState([]);
   const [showControls, setShowControls] = useState(true);
   const [filtersChosen, setFiltersChosen] = useState([]);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -20,6 +21,7 @@ const Home = () => {
       } catch (err) {
         console.log('useEffect getData error');
         // console.log('useEffect getData error', err);
+        setIsError(true);
       }
     };
     getData();
@@ -33,6 +35,7 @@ const Home = () => {
       } catch (err) {
         console.log('useEffect filterSeries error');
         // console.log('useEffect filterSeries error', err);
+        setIsError(true);
       }
     };
     filterSeries();
@@ -121,6 +124,11 @@ const Home = () => {
           </div>
         </div>
         <div className='home__catalogue'>
+          {isError && (
+            <p className='home__empty-catalogue' role='error-message'>
+              Oh no! Something went wrong fetching all series...
+            </p>
+          )}
           {!series ? (
             <p className='home__empty-catalogue' role='loading'>
               Loading series...
