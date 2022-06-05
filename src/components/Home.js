@@ -14,12 +14,12 @@ const Home = () => {
     const getData = async () => {
       try {
         const allSeries = await getAllSeries();
-        console.log('all series:', allSeries);
+        // console.log('all series:', allSeries);
         setSeries(allSeries.data);
         const allGenres = allSeries.data.map((series) => series.genre);
         setUniqueGenres([...new Set(allGenres.flat())]);
       } catch (err) {
-        console.log('useEffect getData error');
+        // console.log('useEffect getData error');
         // console.log('useEffect getData error', err);
         setIsError(true);
       }
@@ -33,7 +33,7 @@ const Home = () => {
         const filteredSeries = await filterSeriesByGenre(filtersChosen);
         setSeries(filteredSeries);
       } catch (err) {
-        console.log('useEffect filterSeries error');
+        // console.log('useEffect filterSeries error');
         // console.log('useEffect filterSeries error', err);
         setIsError(true);
       }
@@ -57,7 +57,7 @@ const Home = () => {
     e.target.classList.toggle('home__filter--selected');
   };
 
-  console.log('filtersChosen:', filtersChosen);
+  // console.log('filtersChosen:', filtersChosen);
 
   const clearFilter = (e) => {
     setFiltersChosen([]);
@@ -79,22 +79,11 @@ const Home = () => {
       </h1>
       <div className='home__content'>
         <div className='home__controls-wrapper'>
-          <div className='home__expand-controls' onClick={handleExpand}>
-            {showControls ? (
-              <p>
-                <span>&laquo;</span>hide
-              </p>
-            ) : (
-              <p>
-                <span>&raquo;</span>search
-              </p>
-            )}
-          </div>
           <div className={showControls ? 'home__controls' : 'u-collapse'}>
             <input
               type='text'
               className='home__search-bar'
-              placeholder={'Search title, actor, plot, year, rating, genre'}
+              placeholder='Search title, actor, plot, year, rating, genre'
             />
             <p className='home__controls-heading'>
               {filtersChosen.length > 0 ? (
@@ -120,6 +109,17 @@ const Home = () => {
               </div>
             ) : (
               <p></p>
+            )}
+          </div>
+          <div className='home__expand-controls' onClick={handleExpand}>
+            {showControls ? (
+              <p>
+                <span>&laquo;</span>hide
+              </p>
+            ) : (
+              <p>
+                <span>&raquo;</span>search
+              </p>
             )}
           </div>
         </div>

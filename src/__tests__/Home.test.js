@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
 import Home from '../components/Home';
 import { BrowserRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 test('Assert loading state then series catalogue displayed upon initial render', async () => {
   axios.get = jest.fn();
@@ -91,7 +92,24 @@ test('Assert loading state rendered then display error message on failed respons
   expect(errorMessage).toHaveTextContent('Oh no! Something went wrong fetching all series...');
 });
 
-test('Assert search bar input is accepted and displayed correctly', () => {});
+test('Assert search bar input is accepted and displayed correctly', async () => {
+  // axios.get = jest.fn();
+
+  // Code that causes React state updates should be wrapped into `act`
+  await act(async () =>
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    )
+  );
+  const searchBarInput = screen.getByRole('textbox', { className: /home__search-bar/i });
+  expect(searchBarInput).toBeInTheDocument();
+
+  const searchTerm = 'silicon v';
+  userEvent.type(searchBarInput, searchTerm);
+  expect(searchBarInput.value).toEqual(searchTerm);
+});
 
 test('Assert filter works', () => {});
 
