@@ -65,7 +65,23 @@ const Home = () => {
 
   const selectFilter = (e) => {
     setSearchInput('');
-    const genreChosen = e.target.innerText.toLowerCase();
+    console.log('e', e);
+    console.log('e.target', e.target);
+    console.log('e.target.innerText', e.target.innerText);
+    console.log('e.target.innerHTML', e.target.innerHTML);
+    console.log('e.target.outerText', e.target.outerText);
+    console.log('e.target.childNodes[0].data', e.target.childNodes[0].data);
+    console.log('e.target.childNodes[0].nodeValue', e.target.childNodes[0].nodeValue);
+    console.log('e.target.childNodes[0].textContent', e.target.childNodes[0].textContent);
+    console.log('e.target.childNodes[0].wholeText', e.target.childNodes[0].wholeText);
+    console.log('e.target.key', e.target.key);
+    // console.log('e.target.value', e.target.value);
+    // console.log('e.target.name', e.target.name);
+    // console.log('e.target.className', e.target.className);
+    // const genreChosen = e.target.innerText.toLowerCase();
+    const genreChosen = e.target.childNodes[0].data.toLowerCase();
+    // const genreChosen = e.target.value;
+    console.log('genreChosen', genreChosen);
     if (!filtersChosen.includes(genreChosen)) {
       setFiltersChosen([...filtersChosen, genreChosen]);
     } else {
@@ -75,7 +91,7 @@ const Home = () => {
     e.target.classList.toggle('home__filter--selected');
   };
 
-  // console.log('filtersChosen:', filtersChosen);
+  console.log('filtersChosen:', filtersChosen);
 
   const clearFilter = (e) => {
     setFiltersChosen([]);
@@ -122,6 +138,7 @@ const Home = () => {
                     className='home__filter'
                     onClick={selectFilter}
                     value={genre.toLowerCase()}
+                    name={genre.toLowerCase()}
                   >
                     {genre}
                   </div>
@@ -143,7 +160,7 @@ const Home = () => {
             )}
           </div>
         </div>
-        <div className='home__catalogue'>
+        <div className='home__catalogue' role='series-catalogue'>
           {isError && (
             <p className='home__empty-catalogue' role='error-message'>
               Oh no! Something went wrong fetching all series...
@@ -158,6 +175,7 @@ const Home = () => {
               No series matching a genre combination of{' '}
               {filtersChosen
                 .map((genre) => {
+                  console.log('GENREEEE', genre);
                   const genreTitleCase =
                     genre.slice(0, 1).toUpperCase() + genre.slice(1, genre.length);
                   if (genre === filtersChosen[filtersChosen.length - 1]) {

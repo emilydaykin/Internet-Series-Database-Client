@@ -173,20 +173,34 @@ test('Assert genre filters are displayed correctly based on series available.', 
   });
 });
 
-// test('Assert genre filters functionality: if clicked, series catalogue will be filtered.', () => {});
+test('Assert genre filters functionality: when clicked, series catalogue will be filtered.', async () => {
+  axios.get = jest.fn();
+  axios.get.mockResolvedValueOnce({ data: mockSeriesData });
 
-// test('Assert filter works: when filter button is clicked, series catalogue is filtered.', async () => {
-//   axios.get = jest.fn();
+  // await act(async () =>
+  // );
+  render(
+    <BrowserRouter>
+      <Home />
+    </BrowserRouter>
+  );
 
-//   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+  await waitFor(() => expect(axios.get).toHaveBeenCalled());
 
-//   await act(async () =>
-//     render(
-//       <BrowserRouter>
-//         <Home />
-//       </BrowserRouter>
-//     )
-//   );
-// });
+  // Assert initial catalogue displays all series:
+  mockSeriesData.forEach((series) => {
+    const seriesCard = screen.getByText(series.name);
+    expect(seriesCard).toBeInTheDocument();
+  });
+
+  const crimeGenreButton = screen.getByText('Crime', { className: 'home__filter' });
+
+  await act(async () => userEvent.click(crimeGenreButton));
+  // await waitFor(async () => await waitFor(() => userEvent.click(crimeGenreButton)));
+
+  // expect(crimeGenreButton).toBeInTheDocument();
+});
+
+// test('Assert "clear filter" button removes filters and rerenders full series catalogue.', async () => {});
 
 // test('Assert collapsability of search and filter controls when user clicks "hide".', () => {});
