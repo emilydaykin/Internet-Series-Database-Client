@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getAllSeries, filterSeriesByGenre } from '../api/series';
+import { getAllSeries, filterSeriesByGenre, getSeriesBySearchTerm } from '../api/series';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -9,6 +9,7 @@ const Home = () => {
   const [showControls, setShowControls] = useState(true);
   const [filtersChosen, setFiltersChosen] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -46,7 +47,24 @@ const Home = () => {
     setShowControls(!showControls);
   };
 
+  const handleSearch = async (e) => {
+    // console.log('e.target.value', e.target.value);
+    // setFiltersChosen([]);
+    setSearchInput(e.target.value);
+    const searchSeries = async () => {
+      try {
+        const searchResults = await getSeriesBySearchTerm(e.target.value);
+        setSeries(searchResults);
+      } catch (err) {
+        console.log('error');
+        // setIsError(true);
+      }
+    };
+    searchSeries();
+  };
+
   const selectFilter = (e) => {
+    setSearchInput('');
     const genreChosen = e.target.innerText.toLowerCase();
     if (!filtersChosen.includes(genreChosen)) {
       setFiltersChosen([...filtersChosen, genreChosen]);
@@ -84,6 +102,8 @@ const Home = () => {
               type='text'
               className='home__search-bar'
               placeholder='Search title, actor, plot, year, rating, genre'
+              onChange={handleSearch}
+              value={searchInput}
             />
             <p className='home__controls-heading'>
               {filtersChosen.length > 0 ? (
@@ -133,7 +153,7 @@ const Home = () => {
             <p className='home__empty-catalogue' role='loading'>
               Loading series...
             </p>
-          ) : series.length == 0 ? (
+          ) : series.length == 0 && filtersChosen.length > 0 ? (
             <p className='home__empty-catalogue'>
               No series matching a genre combination of{' '}
               {filtersChosen
@@ -147,7 +167,18 @@ const Home = () => {
                   }
                 })
                 .join(', ')}
-              . <br /> Please try another search.
+              .
+              <br />
+              <br />
+              Please try another search.
+            </p>
+          ) : series.length == 0 && searchInput ? (
+            <p className='home__empty-catalogue'>
+              No series with a title, actor, plot, year or rating matching your search term of "
+              {searchInput}".
+              <br />
+              <br />
+              Please try another search.
             </p>
           ) : (
             series.map((show) => (
