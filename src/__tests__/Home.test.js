@@ -93,8 +93,6 @@ test('Assert loading state rendered then display error message on failed respons
 });
 
 test('Assert search bar input is accepted and displayed correctly.', async () => {
-  // axios.get = jest.fn();
-
   // Code that causes React state updates should be wrapped into `act`
   await act(async () =>
     render(
@@ -131,7 +129,6 @@ test('Assert search bar functionality: series catalogue is filtered as user sear
   userEvent.type(searchBarInput, searchTerm);
 
   const sherlockCard = screen.queryByText('Sherlock');
-  console.log('sherlockCard', sherlockCard);
   expect(sherlockCard).toBeInTheDocument();
 
   const theOtherSeriesCards = ['Blacklist', 'Modern Family'];
@@ -142,6 +139,54 @@ test('Assert search bar functionality: series catalogue is filtered as user sear
   });
 });
 
-// test('Assert filter works: when filter button is clicked, series catalogue is filtered.', () => {});
+test('Assert genre filters are displayed correctly based on series available.', async () => {
+  axios.get = jest.fn();
+
+  axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+
+  await act(async () =>
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    )
+  );
+
+  // Assert filter 'heading' is displayed
+  const filterHeading = screen.getByText(/filter by genre/i, {
+    className: 'home__controls-heading'
+  });
+  expect(filterHeading).toBeInTheDocument();
+
+  // Assert genre options are displayed:
+  const genresPresent = ['Crime', 'Drama', 'Biography'];
+  genresPresent.forEach((genre) => {
+    const genreFilterButton = screen.getByText(genre, { className: 'home__filter' });
+    expect(genreFilterButton).toBeInTheDocument();
+  });
+
+  // Assert genres that aren't present in mockSeriesData is NOT part of filter list:
+  const genresMissing = ['Fantasy', 'History', 'Reality-TV'];
+  genresMissing.forEach((genre) => {
+    const genreFilterButton = screen.queryByText(genre, { className: 'home__filter' });
+    expect(genreFilterButton).not.toBeInTheDocument();
+  });
+});
+
+// test('Assert genre filters functionality: if clicked, series catalogue will be filtered.', () => {});
+
+// test('Assert filter works: when filter button is clicked, series catalogue is filtered.', async () => {
+//   axios.get = jest.fn();
+
+//   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+
+//   await act(async () =>
+//     render(
+//       <BrowserRouter>
+//         <Home />
+//       </BrowserRouter>
+//     )
+//   );
+// });
 
 // test('Assert collapsability of search and filter controls when user clicks "hide".', () => {});
