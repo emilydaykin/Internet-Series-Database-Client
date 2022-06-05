@@ -5,7 +5,7 @@ import Home from '../components/Home';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
-test('Assert loading state then series catalogue displayed upon initial render', async () => {
+test('Assert loading state then series catalogue displayed upon initial render.', async () => {
   axios.get = jest.fn();
 
   const response = [
@@ -72,7 +72,7 @@ test('Assert loading state then series catalogue displayed upon initial render',
   });
 });
 
-test('Assert loading state rendered then display error message on failed response', async () => {
+test('Assert loading state rendered then display error message on failed response.', async () => {
   axios.get = jest.fn();
   axios.get.mockRejectedValueOnce();
 
@@ -92,7 +92,7 @@ test('Assert loading state rendered then display error message on failed respons
   expect(errorMessage).toHaveTextContent('Oh no! Something went wrong fetching all series...');
 });
 
-test('Assert search bar input is accepted and displayed correctly', async () => {
+test('Assert search bar input is accepted and displayed correctly.', async () => {
   // axios.get = jest.fn();
 
   // Code that causes React state updates should be wrapped into `act`
@@ -106,11 +106,16 @@ test('Assert search bar input is accepted and displayed correctly', async () => 
   const searchBarInput = screen.getByRole('textbox', { className: /home__search-bar/i });
   expect(searchBarInput).toBeInTheDocument();
 
-  const searchTerm = 'silicon v';
+  const searchTerm = 'sherloc';
   userEvent.type(searchBarInput, searchTerm);
-  expect(searchBarInput.value).toEqual(searchTerm);
+
+  await waitFor(() => {
+    expect(searchBarInput.value).toEqual(searchTerm);
+  });
 });
 
-test('Assert filter works', () => {});
+test('Assert search bar functionality: series catalogue is filtered as user searches.', () => {});
 
-test('Assert collapability of search and filter controls when user clicks "hide"', () => {});
+test('Assert filter works: when filter button is clicked, series catalogue is filtered.', () => {});
+
+test('Assert collapsability of search and filter controls when user clicks "hide".', () => {});
