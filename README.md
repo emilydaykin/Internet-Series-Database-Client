@@ -64,3 +64,6 @@ Python script to scrape IMDb
 - scraping (be)
 - reommender system (fe)
 - carousel and card flip CSS (fe)
+
+# Challenges & Takeaways:
+- When testing, any action (based on a user event or inital load) that causes the state to re-render must be wrapped in `act(...)`
