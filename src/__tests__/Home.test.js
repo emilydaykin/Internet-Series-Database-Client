@@ -111,147 +111,9 @@ test('Assert search bar input is accepted and displayed correctly.', async () =>
   });
 });
 
-// test('Assert search bar functionality: series catalogue is filtered as user searches.', async () => {
-//   axios.get = jest.fn();
-//   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
-//   // const searchInput = jest.fn((value) => {});
-
-//   await act(async () =>
-//     render(
-//       <BrowserRouter>
-//         {/* <Home searchInput={searchInput} /> */}
-//         <Home />
-//       </BrowserRouter>
-//     )
-//   );
-//   expect(axios.get).toHaveBeenCalled();
-
-//   const catalogue = screen.getByRole('series-catalogue');
-//   console.log('catalogue BEFORE -----', catalogue.children.length); // 3
-
-//   const searchBarInput = screen.getByRole('textbox', { className: /home__search-bar/i });
-
-//   const searchTerm = 'sherloc';
-//   userEvent.type(searchBarInput, searchTerm);
-//   expect(searchBarInput.value).toEqual(searchTerm);
-//   expect(axios.get).toHaveBeenCalled();
-
-//   console.log('catalogue AFTER -----', catalogue.children.length); // 3
-
-//   // fireEvent.change(searchBarInput, { target: { value: searchTerm } });
-
-//   // const spy = jest.spyOn(video, 'play');
-//   // const isPlaying = video.play();
-
-//   // expect(spy).toHaveBeenCalled();
-//   // expect(isPlaying).toBe(true);
-
-//   const sherlockCard = screen.queryByText(/sherlock/i);
-//   expect(sherlockCard).toBeInTheDocument();
-
-//   // const theOtherSeriesCards = ['Blacklist', 'Modern Family'];
-//   const theOtherSeriesCards = [/blacklist/i, /modern family/i];
-
-//   theOtherSeriesCards.forEach((seriesTitle) => {
-//     const seriesCard = screen.queryByText(seriesTitle);
-//     expect(seriesCard).not.toBeInTheDocument();
-//   });
-// });
-
-// test('Assert genre filters are displayed correctly based on series available.', async () => {
-//   axios.get = jest.fn();
-
-//   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
-
-//   await act(async () =>
-//     render(
-//       <BrowserRouter>
-//         <Home />
-//       </BrowserRouter>
-//     )
-//   );
-
-//   // Assert filter 'heading' is displayed
-//   const filterHeading = screen.getByText(/filter by genre/i, {
-//     className: 'home__controls-heading'
-//   });
-//   expect(filterHeading).toBeInTheDocument();
-
-//   // Assert genre options are displayed:
-//   const genresPresent = ['Crime', 'Drama', 'Biography'];
-//   genresPresent.forEach((genre) => {
-//     const genreFilterButton = screen.getByText(genre, { className: 'home__filter' });
-//     expect(genreFilterButton).toBeInTheDocument();
-//   });
-
-//   // Assert genres that aren't present in mockSeriesData is NOT part of filter list:
-//   const genresMissing = ['Fantasy', 'History', 'Reality-TV'];
-//   genresMissing.forEach((genre) => {
-//     const genreFilterButton = screen.queryByText(genre, { className: 'home__filter' });
-//     expect(genreFilterButton).not.toBeInTheDocument();
-//   });
-// });
-
-// test('Assert genre filters functionality: when clicked, series catalogue will be filtered.', async () => {
-//   axios.get = jest.fn();
-//   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
-
-//   await act(async () =>
-//     render(
-//       <BrowserRouter>
-//         <Home />
-//       </BrowserRouter>
-//     )
-//   );
-
-//   await waitFor(() => expect(axios.get).toHaveBeenCalled());
-//   // await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(1));
-
-//   // Assert initial catalogue displays all series:
-//   // mockSeriesData.forEach((series) => {
-//   //   const seriesCard = screen.getByText(series.name);
-//   //   expect(seriesCard).toBeInTheDocument();
-//   // });
-
-//   const biographyFilter = screen.getByText('Biography', { className: 'home__filter' });
-
-//   // await act(async () => userEvent.click(biographyFilter));
-//   userEvent.click(biographyFilter);
-
-//   // await waitFor(() => expect(axios.get).toHaveBeenCalled());
-//   // await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(2));
-
-//   // const dropoutCard = screen.queryByText(/dropout/i);
-//   // console.log('dropoutCard', dropoutCard);
-//   // expect(dropoutCard).toBeInTheDocument();
-
-//   // await waitFor(() => {
-//   //   const blacklistCard = screen.queryByText(/blacklist/i);
-//   //   expect(blacklistCard).not.toBeInTheDocument();
-//   // });
-
-//   // ----------
-
-//   // const catalogue = screen.getByRole('series-catalogue');
-//   // console.log('SERIES CATALOGUE:', catalogue.children);
-//   // catalogue.children.forEach((child) => console.log('CHILD:', child));
-//   // Assert initial catalogue displays all series:
-//   // mockSeriesData.forEach((series) => {
-//   //   const seriesCard = screen.queryByText(series.name);
-//   //   expect(seriesCard).toBeInTheDocument();
-//   // });
-//   // await waitFor(() => {
-//   //   mockSeriesData.forEach((series) => {
-//   //     const seriesCard = screen.getByText(series.name);
-//   //     expect(seriesCard).toBeInTheDocument();
-//   //   });
-//   // });
-// });
-
-// test('Assert "clear filter" button removes filters and rerenders full series catalogue.', async () => {});
-
-test('Assert collapsability of search and filter controls when user clicks "hide".', async () => {
+test('Assert genre filters are displayed correctly based on series available.', async () => {
   axios.get = jest.fn();
+
   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
 
   await act(async () =>
@@ -262,7 +124,40 @@ test('Assert collapsability of search and filter controls when user clicks "hide
     )
   );
 
-  // Step 1. Assert search/filter controls are hidden upon inital render
+  // Assert filter 'heading' is displayed
+  const filterHeading = screen.getByText(/filter by genre/i, {
+    className: 'home__controls-heading'
+  });
+  expect(filterHeading).toBeInTheDocument();
+
+  // Assert genre options are displayed:
+  const genresPresent = ['Crime', 'Drama', 'Biography'];
+  genresPresent.forEach((genre) => {
+    const genreFilterButton = screen.getByText(genre, { className: 'home__filter' });
+    expect(genreFilterButton).toBeInTheDocument();
+  });
+
+  // Assert genres that aren't present in mockSeriesData is NOT part of filter list:
+  const genresMissing = ['Fantasy', 'History', 'Reality-TV'];
+  genresMissing.forEach((genre) => {
+    const genreFilterButton = screen.queryByText(genre, { className: 'home__filter' });
+    expect(genreFilterButton).not.toBeInTheDocument();
+  });
+});
+
+// test('Assert "clear filter" button removes chosen filters', async () => {});
+
+test('Assert search/filter controls are hidden upon inital render', async () => {
+  axios.get = jest.fn();
+  axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+
+  await act(async () =>
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    )
+  );
 
   const hiddenControlsInitial = screen.queryByText((content, element) => {
     return element.tagName.toLowerCase() === 'div' && element.className === 'u-collapse';
@@ -275,14 +170,26 @@ test('Assert collapsability of search and filter controls when user clicks "hide
   expect(displayedControlsInitial).not.toBeInTheDocument();
 
   const expandControlsButtonInitial = screen.queryByText(/expand/i);
-  console.log('expandControlsButtonInitial', expandControlsButtonInitial);
+  // console.log('expandControlsButtonInitial', expandControlsButtonInitial);
   expect(expandControlsButtonInitial).toBeInTheDocument();
 
   const hideControlsButtonInitial = screen.queryByText(/hide/i);
   expect(hideControlsButtonInitial).not.toBeInTheDocument();
+});
 
-  // Step 2. When user clicks on search, the controls should be displayed
+test("Assert that controls are displayed when user clicks on 'expand' button", async () => {
+  axios.get = jest.fn();
+  axios.get.mockResolvedValueOnce({ data: mockSeriesData });
 
+  await act(async () =>
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    )
+  );
+
+  const expandControlsButtonInitial = screen.queryByText(/expand/i);
   userEvent.click(expandControlsButtonInitial);
   const hideControlsButtonAfterClick = screen.queryByText(/hide/i);
   expect(hideControlsButtonAfterClick).toBeInTheDocument();
