@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const [series, setSeries] = useState(null);
   const [uniqueGenres, setUniqueGenres] = useState([]);
-  const [showControls, setShowControls] = useState(true);
+  const [showControls, setShowControls] = useState(false);
   const [filtersChosen, setFiltersChosen] = useState([]);
   const [isError, setIsError] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -31,12 +31,12 @@ const Home = () => {
   useEffect(() => {
     const filterSeries = async () => {
       try {
-        const filteredSeries = await filterSeriesByGenre(filtersChosen);
+        const filteredSeries = await act(() => filterSeriesByGenre(filtersChosen));
         setSeries(filteredSeries);
       } catch (err) {
-        // console.log('useEffect filterSeries error');
+        console.log('useEffect filterSeries error');
         // console.log('useEffect filterSeries error', err);
-        setIsError(true);
+        // setIsError(true);
       }
     };
     filterSeries();
@@ -64,24 +64,10 @@ const Home = () => {
   };
 
   const selectFilter = (e) => {
+    console.log(`${e.target.childNodes[0].data} clicked!!!!!!!!`);
     setSearchInput('');
-    console.log('e', e);
-    console.log('e.target', e.target);
-    console.log('e.target.innerText', e.target.innerText);
-    console.log('e.target.innerHTML', e.target.innerHTML);
-    console.log('e.target.outerText', e.target.outerText);
-    console.log('e.target.childNodes[0].data', e.target.childNodes[0].data);
-    console.log('e.target.childNodes[0].nodeValue', e.target.childNodes[0].nodeValue);
-    console.log('e.target.childNodes[0].textContent', e.target.childNodes[0].textContent);
-    console.log('e.target.childNodes[0].wholeText', e.target.childNodes[0].wholeText);
-    console.log('e.target.key', e.target.key);
-    // console.log('e.target.value', e.target.value);
-    // console.log('e.target.name', e.target.name);
-    // console.log('e.target.className', e.target.className);
-    // const genreChosen = e.target.innerText.toLowerCase();
     const genreChosen = e.target.childNodes[0].data.toLowerCase();
-    // const genreChosen = e.target.value;
-    console.log('genreChosen', genreChosen);
+    // console.log('genreChosen', genreChosen);
     if (!filtersChosen.includes(genreChosen)) {
       setFiltersChosen([...filtersChosen, genreChosen]);
     } else {
@@ -91,7 +77,8 @@ const Home = () => {
     e.target.classList.toggle('home__filter--selected');
   };
 
-  console.log('filtersChosen:', filtersChosen);
+  // console.log('filtersChosen:', filtersChosen);
+  // console.log('FILTERED series:', series);
 
   const clearFilter = (e) => {
     setFiltersChosen([]);
@@ -155,7 +142,7 @@ const Home = () => {
               </p>
             ) : (
               <p>
-                <span>&raquo;</span>search
+                <span>&raquo;</span>expand
               </p>
             )}
           </div>
