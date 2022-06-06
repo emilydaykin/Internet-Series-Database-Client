@@ -191,8 +191,9 @@ test("Assert that controls are displayed when user clicks on 'expand' button", a
 
   const expandControlsButtonInitial = screen.queryByText(/expand/i);
   userEvent.click(expandControlsButtonInitial);
-  const hideControlsButtonAfterClick = screen.queryByText(/hide/i);
-  expect(hideControlsButtonAfterClick).toBeInTheDocument();
+
+  const hideControlsButton = screen.queryByText(/hide/i);
+  expect(hideControlsButton).toBeInTheDocument();
 
   const expandControlsButtonAfterClick = screen.queryByText(/expand/i);
   expect(expandControlsButtonAfterClick).not.toBeInTheDocument();
