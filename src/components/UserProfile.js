@@ -15,8 +15,15 @@ const UserProfile = () => {
     const getData = async () => {
       try {
         const allSeries = await getAllSeries();
+        console.log('allSeries from UserProfile', allSeries.data);
         setAllSeries(allSeries.data);
-        setFavourites(allSeries.data.slice(10, 30));
+        if (allSeries.data.length >= 31) {
+          setFavourites(allSeries.data.slice(10, 30));
+        } else if (allSeries.data.length === 0) {
+          setFavourites(allSeries.data);
+        } else {
+          setFavourites([allSeries.data[0]]);
+        }
       } catch (err) {
         console.log('useEffect error in UserProfile:', err);
       }
@@ -24,7 +31,7 @@ const UserProfile = () => {
     getData();
   }, []);
 
-  console.log('favourites', favourites);
+  console.log('favourites from UserProfile', favourites);
 
   const calculateFavouriteGenre = () => {
     if (favourites) {
@@ -46,6 +53,7 @@ const UserProfile = () => {
 
   const getRecommendations = () => {
     if (allSeries && favourites) {
+      console.log('GENERATING RECOMMENDATIONS...');
       // 'similaries' = modal genre in their 'liked' list
       console.log('fave genre:', calculateFavouriteGenre());
       const nonLikedSimilaries = allSeries.filter(
@@ -56,7 +64,14 @@ const UserProfile = () => {
       console.log('nonLikedSimilaries', nonLikedSimilaries);
       // Shorten the recommendation list by picking 12 random similar series:
       const shuffledList = [...nonLikedSimilaries].sort(() => 0.5 - Math.random());
-      return shuffledList.slice(0, 12); // will return all if length < 12.
+      if (shuffledList.length >= 12) {
+        return shuffledList.slice(0, 12); // will return all if length < 12.
+      } else {
+        return shuffledList;
+      }
+    } else {
+      console.log('No recommendations generated....');
+      return [];
     }
   };
 
@@ -70,12 +85,12 @@ const UserProfile = () => {
         <p className='user-profile__text u-margin-top-small'>
           The list of {favourites ? `${favourites.length}` : ''} series that you have 'liked'.
         </p>
-        <ElasticCarousel seriesList={favourites} />
+        <ElasticCarousel seriesList={favourites} listType='favourites' />
       </div>
       <div className='user-profile__recommendations'>
         <h2>Other Series You May Like</h2>
         <p className='user-profile__text u-margin-top-small'>Based on your 'liked' series.</p>
-        <ElasticCarousel seriesList={getRecommendations()} />
+        <ElasticCarousel seriesList={getRecommendations()} listType='recommendations' />
       </div>
     </section>
   );
