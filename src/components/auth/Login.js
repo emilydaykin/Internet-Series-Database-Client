@@ -24,6 +24,8 @@ const Login = () => {
       console.log('login submit clicked!');
       await loginUser({ email: emailValue, password: passwordValue });
       navigate('/');
+      // refreshing is probs bad practice, but so that user profile loads right away
+      window.location.reload(true);
     } catch (err) {
       // console.log('err.response', err.response);
       if (emailValue === '' && passwordValue === '') {
