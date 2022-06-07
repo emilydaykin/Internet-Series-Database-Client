@@ -13,9 +13,13 @@ const UserProfile = () => {
   // TEMP
   useEffect(() => {
     const getData = async () => {
-      const allSeries = await getAllSeries();
-      setAllSeries(allSeries.data);
-      setFavourites(allSeries.data.slice(10, 30));
+      try {
+        const allSeries = await getAllSeries();
+        setAllSeries(allSeries.data);
+        setFavourites(allSeries.data.slice(10, 30));
+      } catch (err) {
+        console.log('useEffect error in UserProfile:', err);
+      }
     };
     getData();
   }, []);
