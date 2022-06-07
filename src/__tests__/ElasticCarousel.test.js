@@ -4,7 +4,7 @@ import ElasticCarousel from '../components/ElasticCarousel';
 import { mockSeriesData } from '../__mocks__/seriesData';
 import { BrowserRouter } from 'react-router-dom';
 
-test('(UNIT) Assert no Favourites carousel is displayed if user has no favourited series', async () => {
+test('Assert no Favourites carousel is displayed if user has no favourited series', async () => {
   render(
     <BrowserRouter>
       <ElasticCarousel seriesList={[]} listType='favourites' />;
@@ -24,7 +24,7 @@ test('(UNIT) Assert no Favourites carousel is displayed if user has no favourite
   expect(card).not.toBeInTheDocument();
 });
 
-test('(UNIT) Assert no Recommendations carousel is displayed if user has no favourited series', async () => {
+test('Assert no Recommendations carousel is displayed if user has no favourited series', async () => {
   render(
     <BrowserRouter>
       <ElasticCarousel seriesList={[]} listType='recommendations' />;
@@ -44,7 +44,7 @@ test('(UNIT) Assert no Recommendations carousel is displayed if user has no favo
   expect(card).not.toBeInTheDocument();
 });
 
-test('(UNIT) Assert Favourites carousel is displayed if user has favourited series', () => {
+test('Assert Favourites carousel is displayed if user has favourited series', () => {
   render(
     <BrowserRouter>
       <ElasticCarousel seriesList={mockSeriesData} listType='favourites' />;
@@ -65,7 +65,7 @@ test('(UNIT) Assert Favourites carousel is displayed if user has favourited seri
   expect(cardBacks.length).toEqual(3);
 });
 
-test('(UNIT) Assert Recommendations carousel is displayed if user has favourited series', () => {
+test('Assert Recommendations carousel is displayed if user has favourited series', () => {
   render(
     <BrowserRouter>
       <ElasticCarousel seriesList={mockSeriesData} listType='recommendations' />;

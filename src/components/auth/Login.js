@@ -21,7 +21,7 @@ const Login = () => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      console.log('login submit clicked!');
+      // console.log('login submit clicked!');
       await loginUser({ email: emailValue, password: passwordValue });
       navigate('/');
       // refreshing is probs bad practice, but so that user profile loads right away

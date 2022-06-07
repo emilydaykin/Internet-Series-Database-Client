@@ -33,7 +33,7 @@ test('Assert recommended series div to be displayed', () => {
 // Testing to see how successfully the UserProfile component calls
 // and passes props to the ElasticCarousel component inside it
 
-test('(INT) Assert no carousel displayed if user has no favourited series', async () => {
+test('Assert no carousel displayed if user has no favourited series', async () => {
   axios.get = jest.fn();
   axios.get.mockResolvedValueOnce({ data: [] });
 
@@ -54,12 +54,11 @@ test('(INT) Assert no carousel displayed if user has no favourited series', asyn
 
   const carousel = screen.queryByText(/breakPoints={responsiveBreakPoints}/i);
   const card = screen.queryByText("className='card__side card__side--front'");
-  console.log('card', card);
   expect(carousel).not.toBeInTheDocument();
   expect(card).not.toBeInTheDocument();
 });
 
-test('(INT) Assert carousels are displayed if user has favourited series', async () => {
+test('Assert carousels are displayed if user has favourited series', async () => {
   axios.get = jest.fn();
   axios.get.mockResolvedValueOnce({ data: mockSeriesData });
 

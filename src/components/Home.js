@@ -34,7 +34,7 @@ const Home = () => {
         const filteredSeries = await act(() => filterSeriesByGenre(filtersChosen));
         setSeries(filteredSeries);
       } catch (err) {
-        console.log('useEffect filterSeries error');
+        // console.log('useEffect filterSeries error');
         // console.log('useEffect filterSeries error', err);
         // setIsError(true);
       }
@@ -43,7 +43,7 @@ const Home = () => {
   }, [filtersChosen]);
 
   const handleExpand = () => {
-    console.log('clicked');
+    // console.log('clicked');
     setShowControls(!showControls);
   };
 
@@ -56,7 +56,7 @@ const Home = () => {
         const searchResults = await getSeriesBySearchTerm(e.target.value);
         setSeries(searchResults);
       } catch (err) {
-        console.log('error');
+        // console.log('error');
         // setIsError(true);
       }
     };

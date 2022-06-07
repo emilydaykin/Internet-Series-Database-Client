@@ -15,7 +15,7 @@ const Navbar = () => {
   // }
 
   useEffect(() => {
-    console.log('-------- useEffect being run!!!');
+    // console.log('-------- useEffect being run!!!');
     setAdminState(isAdmin());
     setIsLoggedInUser(getLoggedInUser());
   }, [location, sessionStorage]);
