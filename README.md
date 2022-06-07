@@ -52,10 +52,12 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
 # Architecture
 - Secure routing
 - how many model schemas
-- unit & integration testing???  (XX test suits and XX tests)
-  - Login (4 tests)
-  - Register (11 tests)
-  - Home (5 tests?)
+- Unit & Integration testing (5(??) test suites and 30(??) tests)
+  - Login (4 unit tests)
+  - Register (11 unit tests)
+  - Home (6 unit tests)
+  - UserProfile (3 unit tests & 2 integration tests)
+  - ElasticCarousel (4 unit tests)
 
 # Data Collection
 Python script to scrape IMDb
@@ -67,3 +69,4 @@ Python script to scrape IMDb
 
 # Challenges & Takeaways:
 - When testing, any action (based on a user event or inital load) that causes the state to re-render must be wrapped in `act(...)`
+- Testing components that are only accessible to authenticated users is done the same way as testing any other (public) component; the component is there in the codebase whether a user signs in or not, so when provided jest mock data, those components can be tested!
