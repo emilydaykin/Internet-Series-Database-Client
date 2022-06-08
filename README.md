@@ -58,6 +58,7 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
   - Home (6 unit tests)
   - UserProfile (3 unit tests & 2 integration tests)
   - ElasticCarousel (4 unit tests)
+  - Navbar (1 unit test)
 
 # Data Collection
 Python script to scrape IMDb
