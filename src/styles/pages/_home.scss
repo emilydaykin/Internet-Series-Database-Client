@@ -66,18 +66,15 @@
   &__clear-filter {
     font-family: inherit;
     padding: .5rem 1rem;
-    // border: 1px solid $theme-blue-light;
     border: none;
     border-radius: 4px;
     background-color: transparent;
     color: $theme-blue-light;
-    // text-shadow: 1rem 1rem 1rem white;
     transition: transform .2s;
 
     &:hover {
       cursor: pointer;
       transform: scale(1.05);
-      // color: $theme-midnight-blue;
       font-weight: 600;
     }
 
