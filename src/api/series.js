@@ -20,7 +20,7 @@ export const filterSeriesByGenre = async (genreArray) => {
     data: { genres: genreArray }
   };
   const { data } = await axios.request(options);
-  console.log('filtered series:', data);
+  // console.log('filtered series:', data);
   return data;
 };
 

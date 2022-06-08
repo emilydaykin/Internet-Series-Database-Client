@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSeriesBySearchTerm, createComment, deleteComment } from '../api/series';
+import { addSeriesToUserFavourites } from '../api/user';
 import { getLoggedInUser } from '../lib/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as filledHeart } from '@fortawesome/free-solid-svg-icons';
@@ -25,9 +26,30 @@ const ShowSeries = () => {
 
   // console.log('show', series);
 
-  if (!series) {
-    return <p>Loading series...</p>;
+  async function handleDoubleClickFavourite(e) {
+    // If logged in user and it's a double click:
+    if (getLoggedInUser() && e.detail === 2) {
+      console.log('user logged in and double clicked');
+      await addSeriesToUserFavourites(id);
+      setFavourited(true);
+    }
   }
+
+  function isFavouritedByUser() {
+    if (getLoggedInUser()) {
+      console.log('getLoggedInUser()', getLoggedInUser());
+      if (getLoggedInUser().faves?.length > 0) {
+        const alreadyFaved = !!getLoggedInUser().faves.find((fave) => fave._id === id);
+        console.log('alreadyFaved', alreadyFaved);
+        // return
+      } else {
+        // return false;
+        console.log('alreadyFaved', false);
+      }
+    }
+  }
+
+  isFavouritedByUser();
 
   function handleCommentChange(e) {
     setCommentValue(e.target.value);
@@ -53,6 +75,10 @@ const ShowSeries = () => {
     setSeries(data);
   }
 
+  if (!series) {
+    return <p>Loading series...</p>;
+  }
+
   return (
     <section className='show-series'>
       <h1 className='show-series__title'>{series.name}</h1>
@@ -66,7 +92,7 @@ const ShowSeries = () => {
             {getLoggedInUser() && (
               <FontAwesomeIcon icon={emptyHeart} className='show-series__heart' />
             )}
-            <img src={series.image} alt='' />
+            <img src={series.image} alt='' onClick={handleDoubleClickFavourite} />
           </span>
         </div>
 
