@@ -3,12 +3,16 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSeriesBySearchTerm, createComment, deleteComment } from '../api/series';
 import { getLoggedInUser } from '../lib/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as filledHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 
 const ShowSeries = () => {
   const { id } = useParams();
   const [series, setSeries] = useState(null);
   const [commentValue, setCommentValue] = useState('');
   const [ratingValue, setRatingValue] = useState('');
+  const [favourited, setFavourited] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -52,9 +56,18 @@ const ShowSeries = () => {
   return (
     <section className='show-series'>
       <h1 className='show-series__title'>{series.name}</h1>
+
       <div className='show-series__series-wrapper'>
         <div className='show-series__poster'>
-          <img src={series.image} alt='' />
+          <span
+            className={getLoggedInUser() ? 'hovertext' : 'hide'}
+            data-hover="Double click the poster to 'favourite' it!"
+          >
+            {getLoggedInUser() && (
+              <FontAwesomeIcon icon={emptyHeart} className='show-series__heart' />
+            )}
+            <img src={series.image} alt='' />
+          </span>
         </div>
 
         <div className='show-series__info'>
@@ -78,7 +91,6 @@ const ShowSeries = () => {
           </p>
         </div>
       </div>
-
       <div className='show-series__comments-section'>
         <h2 className='u-margin-bottom-small'>Comments 💬</h2>
         <div className='show-series__comments-content'>
