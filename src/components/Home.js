@@ -16,7 +16,7 @@ const Home = () => {
       try {
         const allSeries = await getAllSeries();
         // console.log('all series:', allSeries);
-        setSeries(allSeries.data);
+        setSeries(allSeries.data.sort(() => 0.5 - Math.random()));
         const allGenres = allSeries.data.map((series) => series.genre);
         setUniqueGenres([...new Set(allGenres.flat())]);
       } catch (err) {
