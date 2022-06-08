@@ -32,7 +32,7 @@ const Home = () => {
     const filterSeries = async () => {
       try {
         const filteredSeries = await filterSeriesByGenre(filtersChosen);
-        console.log('filteredSeries', filteredSeries);
+        // console.log('filteredSeries', filteredSeries);
         setSeries(filteredSeries);
       } catch (err) {
         // console.log('useEffect filterSeries error');
@@ -65,7 +65,7 @@ const Home = () => {
   };
 
   const selectFilter = (e) => {
-    console.log(`${e.target.childNodes[0].data} clicked!!!!!!!!`);
+    // console.log(`${e.target.childNodes[0].data} clicked!!!!!!!!`);
     setSearchInput('');
     const genreChosen = e.target.childNodes[0].data.toLowerCase();
     // console.log('genreChosen', genreChosen);
@@ -78,7 +78,7 @@ const Home = () => {
     e.target.classList.toggle('home__filter--selected');
   };
 
-  console.log('filtersChosen:', filtersChosen);
+  // console.log('filtersChosen:', filtersChosen);
   // console.log('FILTERED series:', series);
 
   const clearFilter = (e) => {
@@ -163,7 +163,7 @@ const Home = () => {
               No series matching a genre combination of{' '}
               {filtersChosen
                 .map((genre) => {
-                  console.log('GENREEEE', genre);
+                  // console.log('GENREEEE', genre);
                   const genreTitleCase =
                     genre.slice(0, 1).toUpperCase() + genre.slice(1, genre.length);
                   if (genre === filtersChosen[filtersChosen.length - 1]) {
