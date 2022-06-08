@@ -9,13 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   let location = useLocation(); // detects if routes have changed in the site
 
-  // function checkUserLoggedIn() {
-  //   const token = sessionStorage.getItem('token');
-  //   if (!token) return false;
-  // }
-
   useEffect(() => {
-    // console.log('-------- useEffect being run!!!');
     setAdminState(isAdmin());
     setIsLoggedInUser(getLoggedInUser());
   }, [location, sessionStorage]);
@@ -29,8 +23,6 @@ const Navbar = () => {
     navigate('/login');
   }
 
-  // console.log('getLoggedInUser:', getLoggedInUser);
-
   return (
     <header>
       <nav className='navbar'>
@@ -38,8 +30,7 @@ const Navbar = () => {
           <Link className='navbar__item' to={'/'}>
             🎬 Home 🎥
           </Link>
-          {/* isAdmin() */}
-          {isLoggedInUser && (
+          {isLoggedInUser && adminState && (
             <Link className='navbar__item' to={'/addSeries'}>
               📺 Add Series 📀
             </Link>
