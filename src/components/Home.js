@@ -31,7 +31,8 @@ const Home = () => {
   useEffect(() => {
     const filterSeries = async () => {
       try {
-        const filteredSeries = await act(() => filterSeriesByGenre(filtersChosen));
+        const filteredSeries = await filterSeriesByGenre(filtersChosen);
+        console.log('filteredSeries', filteredSeries);
         setSeries(filteredSeries);
       } catch (err) {
         // console.log('useEffect filterSeries error');
@@ -77,7 +78,7 @@ const Home = () => {
     e.target.classList.toggle('home__filter--selected');
   };
 
-  // console.log('filtersChosen:', filtersChosen);
+  console.log('filtersChosen:', filtersChosen);
   // console.log('FILTERED series:', series);
 
   const clearFilter = (e) => {
