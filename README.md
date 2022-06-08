@@ -44,7 +44,7 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
 - Recommender System (for logged in users) to suggest series similar to ones they've liked. 
 - Authenticated users can:
   - View their profile page
-  - Add a series to their profile's page via 'favouriting'
+  - Add a series to their profile's page via 'favouriting' (double clicking on the series poster on the individual series page)
 - Only admins can:
   - Add new series to the catalogue
   - Delete a series (with a safety confirmation)?????
@@ -52,13 +52,13 @@ ISDb is a full stack MERN (MongoDB, Express, React & Node) web and mobile applic
 # Architecture
 - Secure routing
 - how many model schemas
-- Unit & Integration testing (5(??) test suites and 30(??) tests)
+- Unit & Integration testing (5 test suites and 31 tests)
+  - Home (6 unit tests)
+  - Navbar (1 unit test)
   - Login (4 unit tests)
   - Register (11 unit tests)
-  - Home (6 unit tests)
   - UserProfile (3 unit tests & 2 integration tests)
   - ElasticCarousel (4 unit tests)
-  - Navbar (1 unit test)
 
 # Data Collection
 Python script to scrape IMDb
