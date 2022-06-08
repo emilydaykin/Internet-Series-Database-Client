@@ -22,3 +22,21 @@ export const registerUser = async (userData) => {
 
   return data;
 };
+
+export const addSeriesToUserFavourites = async (seriesId) => {
+  console.log('token 412', window.sessionStorage.getItem('token'));
+
+  const options = {
+    method: 'PUT',
+    url: '/api/users',
+    data: { seriesId: seriesId },
+    headers: {
+      authorization: `Bearer ${window.sessionStorage.getItem('token')}`
+    }
+  };
+
+  console.log('options 412', options);
+  const { data } = await axios.request(options);
+  console.log('data 412', data);
+  return data;
+};
