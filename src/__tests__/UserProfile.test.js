@@ -59,8 +59,24 @@ test('Assert no carousel displayed if user has no favourited series', async () =
 });
 
 test('Assert carousels are displayed if user has favourited series', async () => {
-  axios.get = jest.fn();
-  axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+  jest.mock('axios');
+
+  // axios.get = jest.fn();
+  // axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+  axios.get.mockResolvedValue({ data: mockSeriesData });
+
+  axios.get.mockImplementation((url) => {
+    switch (url) {
+      // all series
+      case '/api/series':
+        return Promise.resolve({ data: mockSeriesData });
+      // favourites
+      case `/api/users/testUser000`:
+        return Promise.resolve({ data: mockSeriesData[0] });
+      default:
+        return Promise.reject(new Error('not found'));
+    }
+  });
 
   await act(async () => {
     render(
@@ -72,10 +88,18 @@ test('Assert carousels are displayed if user has favourited series', async () =>
 
   await waitFor(() => expect(axios.get).toHaveBeenCalled());
 
-  const NoFavouritesMessage = screen.queryByText(/no favourites yet/i);
-  expect(NoFavouritesMessage).not.toBeInTheDocument();
-  const NoRecommendationsMessage = screen.queryByText(/no recommendations yet/i);
-  expect(NoRecommendationsMessage).not.toBeInTheDocument();
+  axios.get('/api/series').then((resp) => expect(resp.data).toEqual(mockSeriesData));
+
+  axios.get('/api/users/testUser000').then((resp) => expect(resp.data).toEqual(mockSeriesData[0]));
+
+  // const seriesCard = screen.queryByText(mockSeriesData[0].name);
+  // expect(seriesCard).toBeInTheDocument();
+
+  const noFavouritesMessage = screen.queryByText(/no favourites yet/i);
+  // console.log('noFavouritesMessage', noFavouritesMessage);
+  expect(noFavouritesMessage).not.toBeInTheDocument();
+  const noRecommendationsMessage = screen.queryByText(/no recommendations yet/i);
+  expect(noRecommendationsMessage).not.toBeInTheDocument();
 
   const carouselCards = screen.getAllByRole('link', { className: /card/i });
   // at least 1 card for favourites, 1 for recommendations
