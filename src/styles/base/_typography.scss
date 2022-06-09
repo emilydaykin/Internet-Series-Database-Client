@@ -18,6 +18,10 @@ h1 {
     border-radius: .8rem;
     padding: .1rem .7rem;
     font-weight: 700;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

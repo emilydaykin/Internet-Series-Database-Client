@@ -43,6 +43,10 @@ const Home = () => {
     filterSeries();
   }, [filtersChosen]);
 
+  const refreshPage = () => {
+    window.location.reload(true);
+  };
+
   const handleExpand = () => {
     // console.log('clicked');
     setShowControls(!showControls);
@@ -97,7 +101,7 @@ const Home = () => {
   return (
     <section className='home'>
       <h1 className='u-margin-bottom-small'>
-        <span>ISDb</span> Internet Series Database
+        <span onClick={refreshPage}>ISDb</span>&nbsp;Internet Series Database
       </h1>
       <div className='home__content'>
         <div className='home__controls-wrapper'>
