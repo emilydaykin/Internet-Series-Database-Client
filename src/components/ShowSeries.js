@@ -13,7 +13,10 @@ const ShowSeries = () => {
   const [series, setSeries] = useState(null);
   const [commentValue, setCommentValue] = useState('');
   const [ratingValue, setRatingValue] = useState('');
-  const [favourited, setFavourited] = useState(false);
+  const isAlreadyFavouritedByUser = () => {
+    return !!getLoggedInUser()?.faves?.find((fave) => fave._id === id);
+  };
+  const [favourited, setFavourited] = useState(isAlreadyFavouritedByUser());
 
   useEffect(() => {
     const getData = async () => {
@@ -28,28 +31,14 @@ const ShowSeries = () => {
 
   async function handleDoubleClickFavourite(e) {
     // If logged in user and it's a double click:
+
     if (getLoggedInUser() && e.detail === 2) {
-      console.log('user logged in and double clicked');
+      // console.log('user logged in and double clicked');
       await addSeriesToUserFavourites(id);
-      setFavourited(true);
+      // console.log('getLoggedInUser()', getLoggedInUser());
+      setFavourited(!favourited);
     }
   }
-
-  function isFavouritedByUser() {
-    if (getLoggedInUser()) {
-      console.log('getLoggedInUser()', getLoggedInUser());
-      if (getLoggedInUser().faves?.length > 0) {
-        const alreadyFaved = !!getLoggedInUser().faves.find((fave) => fave._id === id);
-        console.log('alreadyFaved', alreadyFaved);
-        // return
-      } else {
-        // return false;
-        console.log('alreadyFaved', false);
-      }
-    }
-  }
-
-  isFavouritedByUser();
 
   function handleCommentChange(e) {
     setCommentValue(e.target.value);
@@ -90,7 +79,10 @@ const ShowSeries = () => {
             data-hover="Double click the poster to 'favourite' it!"
           >
             {getLoggedInUser() && (
-              <FontAwesomeIcon icon={emptyHeart} className='show-series__heart' />
+              <FontAwesomeIcon
+                icon={favourited ? filledHeart : emptyHeart}
+                className='show-series__heart'
+              />
             )}
             <img src={series.image} alt='' onClick={handleDoubleClickFavourite} />
           </span>
