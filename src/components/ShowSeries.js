@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSeriesBySearchTerm, createComment, deleteComment } from '../api/series';
-import { addSeriesToUserFavourites } from '../api/user';
+import { addSeriesToUserFavourites, getUserFavourites } from '../api/user';
 import { getLoggedInUser } from '../lib/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as filledHeart } from '@fortawesome/free-solid-svg-icons';
@@ -13,10 +13,13 @@ const ShowSeries = () => {
   const [series, setSeries] = useState(null);
   const [commentValue, setCommentValue] = useState('');
   const [ratingValue, setRatingValue] = useState('');
-  const isAlreadyFavouritedByUser = () => {
-    return !!getLoggedInUser()?.faves?.find((fave) => fave._id === id);
-  };
-  const [favourited, setFavourited] = useState(isAlreadyFavouritedByUser());
+  // const isAlreadyFavouritedByUser = () => {
+  //   return !!getLoggedInUser()?.faves?.find((fave) => fave._id === id);
+  // };
+  const [favourited, setFavourited] = useState(true);
+
+  // console.log('isAlreadyFavouritedByUser:', isAlreadyFavouritedByUser());
+  // console.log(`${series.name} favourited: {favourited}`);
 
   useEffect(() => {
     const getData = async () => {
@@ -25,7 +28,24 @@ const ShowSeries = () => {
       setSeries(show);
     };
     getData();
+
+    const getFavouritesData = async () => {
+      try {
+        const userFavourites = await getUserFavourites(getLoggedInUser()?.userId);
+        // console.log('userFavourites', userFavourites);
+        setFavourited(!!userFavourites.find((fave) => fave._id === id));
+      } catch (err) {}
+    };
+    getFavouritesData();
   }, []);
+
+  // useEffect(() => {
+  //   const isAlreadyFavouritedByUser = () => {
+  //     return !!getLoggedInUser()?.faves?.find((fave) => fave._id === id);
+  //   };
+
+  //   setFavourited(isAlreadyFavouritedByUser());
+  // }, []);
 
   // console.log('show', series);
 
@@ -34,11 +54,14 @@ const ShowSeries = () => {
 
     if (getLoggedInUser() && e.detail === 2) {
       // console.log('user logged in and double clicked');
-      await addSeriesToUserFavourites(id);
+      const userObject = await addSeriesToUserFavourites(id);
+      console.log('userObject', userObject);
       // console.log('getLoggedInUser()', getLoggedInUser());
       setFavourited(!favourited);
     }
   }
+  // console.log(`getLoggedInUser():`, getLoggedInUser());
+  // console.log(`user faves (${getLoggedInUser().faves.length}):`, getLoggedInUser().faves);
 
   function handleCommentChange(e) {
     setCommentValue(e.target.value);
