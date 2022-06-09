@@ -13,13 +13,8 @@ const ShowSeries = () => {
   const [series, setSeries] = useState(null);
   const [commentValue, setCommentValue] = useState('');
   const [ratingValue, setRatingValue] = useState('');
-  // const isAlreadyFavouritedByUser = () => {
-  //   return !!getLoggedInUser()?.faves?.find((fave) => fave._id === id);
-  // };
-  const [favourited, setFavourited] = useState(true);
 
-  // console.log('isAlreadyFavouritedByUser:', isAlreadyFavouritedByUser());
-  // console.log(`${series.name} favourited: {favourited}`);
+  const [favourited, setFavourited] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -32,36 +27,19 @@ const ShowSeries = () => {
     const getFavouritesData = async () => {
       try {
         const userFavourites = await getUserFavourites(getLoggedInUser()?.userId);
-        // console.log('userFavourites', userFavourites);
         setFavourited(!!userFavourites.find((fave) => fave._id === id));
       } catch (err) {}
     };
     getFavouritesData();
   }, []);
 
-  // useEffect(() => {
-  //   const isAlreadyFavouritedByUser = () => {
-  //     return !!getLoggedInUser()?.faves?.find((fave) => fave._id === id);
-  //   };
-
-  //   setFavourited(isAlreadyFavouritedByUser());
-  // }, []);
-
-  // console.log('show', series);
-
   async function handleDoubleClickFavourite(e) {
     // If logged in user and it's a double click:
-
     if (getLoggedInUser() && e.detail === 2) {
-      // console.log('user logged in and double clicked');
       const userObject = await addSeriesToUserFavourites(id);
-      console.log('userObject', userObject);
-      // console.log('getLoggedInUser()', getLoggedInUser());
       setFavourited(!favourited);
     }
   }
-  // console.log(`getLoggedInUser():`, getLoggedInUser());
-  // console.log(`user faves (${getLoggedInUser().faves.length}):`, getLoggedInUser().faves);
 
   function handleCommentChange(e) {
     setCommentValue(e.target.value);
