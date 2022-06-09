@@ -77,7 +77,9 @@ const ShowSeries = () => {
         <div className='show-series__poster'>
           <span
             className={getLoggedInUser() ? 'hovertext' : 'hide'}
-            data-hover="Double click the poster to 'favourite' it!"
+            data-hover={`Double click the poster to '${
+              !favourited ? 'favourite' : 'un-favourite'
+            }' it!`}
           >
             {getLoggedInUser() && (
               <FontAwesomeIcon
