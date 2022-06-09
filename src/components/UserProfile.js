@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getLoggedInUser } from '../lib/auth';
 import ElasticCarousel from './ElasticCarousel';
 import { getAllSeries } from '../api/series';
+import { getUserFavourites } from '../api/user';
 
 const UserProfile = () => {
   const userObject = getLoggedInUser();
@@ -10,28 +11,26 @@ const UserProfile = () => {
   const [favourites, setFavourites] = useState(null);
   const [recommendations, setRecommendations] = useState(null);
 
-  // TEMP
   useEffect(() => {
-    const getData = async () => {
+    const getSeriesData = async () => {
       try {
         const allSeries = await getAllSeries();
-        // console.log('allSeries from UserProfile', allSeries.data);
         setAllSeries(allSeries.data);
-        if (allSeries.data.length >= 31) {
-          setFavourites(allSeries.data.slice(10, 30));
-        } else if (allSeries.data.length === 0) {
-          setFavourites(allSeries.data);
-        } else {
-          setFavourites([allSeries.data[0]]);
-        }
       } catch (err) {
         // console.log('useEffect error in UserProfile:', err);
       }
     };
-    getData();
-  }, []);
+    getSeriesData();
 
-  // console.log('favourites from UserProfile', favourites);
+    const getFavouritesData = async () => {
+      try {
+        const userFavourites = await getUserFavourites(userObject.userId);
+        console.log('userFavourites', userFavourites);
+        setFavourites(userFavourites);
+      } catch (err) {}
+    };
+    getFavouritesData();
+  }, []);
 
   const calculateFavouriteGenre = () => {
     if (favourites) {
