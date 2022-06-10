@@ -100,12 +100,12 @@ const Home = () => {
 
   return (
     <section className='home'>
-      <h1 className='u-margin-bottom-small'>
+      <h1 className='home__heading u-margin-bottom-small'>
         <span onClick={refreshPage}>ISDb</span>&nbsp;Internet Series Database
       </h1>
       <div className='home__content'>
         <div className='home__controls-wrapper'>
-          <div className={showControls ? 'home__controls' : 'u-collapse'}>
+          <div className={showControls ? 'home__controls' : 'home__collapse-controls'}>
             <input
               type='text'
               className='home__search-bar'
@@ -150,11 +150,12 @@ const Home = () => {
           >
             {showControls ? (
               <p>
-                <span>&laquo;</span>hide
+                {screen.width >= 460 ? <span>&laquo;</span> : <span>&uarr;</span>}&ensp;hide search
               </p>
             ) : (
               <p>
-                <span>&raquo;</span>expand
+                {screen.width >= 460 ? <span>&raquo;</span> : <span>&darr;</span>}&ensp;expand
+                search
               </p>
             )}
           </div>
@@ -201,7 +202,7 @@ const Home = () => {
             series.map((show) => (
               <div key={show._id} className='home__series-card'>
                 <Link className='home__series-link' to={`/series/${show._id}`}>
-                  <h2>{truncateText(show.name, 23)}</h2>
+                  <h2 className='home__subheading'>{truncateText(show.name, 23)}</h2>
                   <img
                     className='home__series-poster'
                     src={show.image}
