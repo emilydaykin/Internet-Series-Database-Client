@@ -43,3 +43,9 @@
     max-width: 25rem;
   }
 }
+
+@media (max-width: 460px) {
+  .form-wrapper {
+    margin-top: 4rem;
+  }
+}
