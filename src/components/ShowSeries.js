@@ -53,7 +53,11 @@ const ShowSeries = () => {
     e.preventDefault();
     console.log('submitted!');
     console.log(e.target.value);
-    const data = await createComment(id, { text: commentValue, rating: ratingValue });
+    const data = await createComment(id, {
+      text: commentValue,
+      rating: ratingValue,
+      createdByName: getLoggedInUser().username
+    });
     setCommentValue('');
     setRatingValue('');
     setSeries(data);
@@ -157,7 +161,7 @@ const ShowSeries = () => {
                 return (
                   <div className='show-series__single-comment-line' key={comment._id}>
                     <div className='show-series__individual-comment'>
-                      <p>{comment.text}</p>
+                      <p>{comment.text}</p>&emsp;
                       <p>{comment.rating}</p>
                     </div>
                     {getLoggedInUser() === comment.createdBy && (
