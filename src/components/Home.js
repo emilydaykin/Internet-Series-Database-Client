@@ -140,7 +140,14 @@ const Home = () => {
               <p></p>
             )}
           </div>
-          <div className='home__expand-controls' onClick={handleExpand}>
+          <div
+            className={
+              showControls
+                ? 'home__expand-controls home__expand-controls--hide'
+                : 'home__expand-controls home__expand-controls--expand'
+            }
+            onClick={handleExpand}
+          >
             {showControls ? (
               <p>
                 <span>&laquo;</span>hide

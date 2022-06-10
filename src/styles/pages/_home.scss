@@ -12,9 +12,11 @@
     position: relative;
     // position: fixed;
     // border: 3px solid orange;
+    // width: unset;
     // display: flex;
     // flex-direction: column;
     transition: all .3s linear;
+    // animation: appearGradually 5s;
   }
 
   &__expand-controls {
@@ -27,22 +29,43 @@
     text-orientation: upright;
     text-transform: uppercase;
     color: $theme-grey;
-    // border: 2px solid red; 
+    // border: 3px solid red; 
+    transition: all 1s linear;
+    // animation: appearGradually 5s;
     
     p span {
       font-size: 3.5rem;
+      // transition: all 1s linear;
     }
     
     &:hover {
       color: $theme-blue-light;
       cursor: pointer;
+      // transform: scale(1.2)
+    }
+
+    &--hide {
+      // transition: all 1s linear;
+      // transform: translateX(0);
+      // opacity: .7;
+      // animation: appearGradually 5s ;
+    }
+
+    &--expand {
+      // transform: translateX(-10rem);
+      // opacity: 1;
+      animation: appearGradually 4s;
+      // animation-delay: 2s;
     }
   }
 
   &__controls {
     transform: translateX(0);
+    // position: relative;
     opacity: 1;
     width: 100%;
+    // border: 3px solid green;
+    transition: all .5s linear;
   }
 
   &__search-bar {
@@ -176,5 +199,14 @@
     h2 {
       font-weight: 600;
     }
+  }
+}
+
+@keyframes appearGradually {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
