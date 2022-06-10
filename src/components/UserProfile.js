@@ -25,7 +25,7 @@ const UserProfile = () => {
     const getFavouritesData = async () => {
       try {
         const userFavourites = await getUserFavourites(userObject.userId);
-        console.log('userFavourites', userFavourites);
+        // console.log('userFavourites', userFavourites);
         setFavourites(userFavourites);
       } catch (err) {}
     };
@@ -62,11 +62,8 @@ const UserProfile = () => {
       // console.log('nonLikedSimilaries', nonLikedSimilaries);
       // Shorten the recommendation list by picking 12 random similar series:
       const shuffledList = [...nonLikedSimilaries].sort(() => 0.5 - Math.random());
-      if (shuffledList.length >= 12) {
-        return shuffledList.slice(0, 12); // will return all if length < 12.
-      } else {
-        return shuffledList;
-      }
+      // console.log('shuffledlist length:', shuffledList.length);
+      return shuffledList.length >= 12 ? shuffledList.slice(0, 12) : shuffledList; // will return all if length < 12.
     } else {
       // console.log('No recommendations generated....');
       return [];

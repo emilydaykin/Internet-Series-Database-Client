@@ -14,7 +14,7 @@ const Navbar = () => {
     setIsLoggedInUser(getLoggedInUser());
   }, [location, sessionStorage]);
 
-  console.log('location', location);
+  // console.log('location', location);
 
   function logoutUser() {
     sessionStorage.removeItem('token');
