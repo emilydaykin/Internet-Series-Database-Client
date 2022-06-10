@@ -164,7 +164,7 @@ const ShowSeries = () => {
                       <p>{comment.text}</p>&emsp;
                       <p>{comment.rating}</p>
                     </div>
-                    {getLoggedInUser() === comment.createdBy && (
+                    {getLoggedInUser().userId === comment.createdById && (
                       <button onClick={() => handleCommentDelete(comment._id)}>❌</button>
                     )}
                   </div>
