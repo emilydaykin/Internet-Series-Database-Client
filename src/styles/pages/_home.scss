@@ -10,11 +10,7 @@
     margin: 2rem 0 0 2rem;
     position: relative;
     transition: all .3s linear;
-    // border: 3px solid orange;
     width: fit-content
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
   }
 
   &__expand-controls {
@@ -27,8 +23,7 @@
     text-orientation: upright;
     text-transform: uppercase;
     color: $theme-grey;
-    transition: all 1s linear;
-    // border: 3px solid red;
+    // transition: all 1s linear;
     
     p span {
       font-size: 3.5rem;
@@ -49,7 +44,6 @@
     opacity: 1;
     width: 100%;
     transition: all .5s linear;
-    // border: 3px solid green;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,7 +71,6 @@
     text-align: center;
     color: $theme-grey;
     padding: .5rem 1rem;
-    // border: 2px solid pink;
   }
 
   &__clear-filter {
@@ -136,7 +129,6 @@
   &__catalogue {
     display: flex;
     flex-wrap: wrap;
-    // border: 3px solid aqua;
     justify-content: center;
     align-items: center;
     margin-left: 6rem;
@@ -214,7 +206,6 @@
       margin-top: 2rem;
       top: -5rem;
       left: 10%;
-      // right: 5%;
       writing-mode: horizontal-tb;
       letter-spacing: .75rem;
 
@@ -224,7 +215,7 @@
     }
 
     &__controls-wrapper {
-          margin: 2rem 0 0 0;
+      margin: 2rem 0 0 0;
     }
 
     &__controls {
