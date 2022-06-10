@@ -8,15 +8,8 @@
   // SEARCH & FILTER CONTROLS
   &__controls-wrapper {
     margin: 2rem 0 0 2rem;
-    // align-self: center;
     position: relative;
-    // position: fixed;
-    // border: 3px solid orange;
-    // width: unset;
-    // display: flex;
-    // flex-direction: column;
     transition: all .3s linear;
-    // animation: appearGradually 5s;
   }
 
   &__expand-controls {
@@ -29,49 +22,32 @@
     text-orientation: upright;
     text-transform: uppercase;
     color: $theme-grey;
-    // border: 3px solid red; 
     transition: all 1s linear;
-    // animation: appearGradually 5s;
     
     p span {
       font-size: 3.5rem;
-      // transition: all 1s linear;
     }
     
     &:hover {
       color: $theme-blue-light;
       cursor: pointer;
-      // transform: scale(1.2)
-    }
-
-    &--hide {
-      // transition: all 1s linear;
-      // transform: translateX(0);
-      // opacity: .7;
-      // animation: appearGradually 5s ;
     }
 
     &--expand {
-      // transform: translateX(-10rem);
-      // opacity: 1;
-      animation: appearGradually 4s;
-      // animation-delay: 2s;
+      animation: fadeIn 4s;
     }
   }
 
   &__controls {
     transform: translateX(0);
-    // position: relative;
     opacity: 1;
     width: 100%;
-    // border: 3px solid green;
     transition: all .5s linear;
   }
 
   &__search-bar {
     font-family: inherit;
     padding: 1rem 1.5rem;
-    // height: 10rem;
     width: 29rem;
     font-size: 1.2rem;
     border-radius: 10px;
@@ -79,7 +55,6 @@
   }
   
   &__controls-heading {
-    // border: 2px solid pink;
     margin-top: 2rem;
     text-align: center;
     color: $theme-grey;
@@ -107,7 +82,6 @@
   }
 
   &__filters {
-    // border: 2px solid yellow;
     max-width: 29rem;
     display: flex;
     justify-content: center;
@@ -145,12 +119,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    // border: 2px solid limegreen;
     margin-left: 6rem;
-    // margin-left: 30rem;
     max-height: calc(100vh - 15rem);
     height: calc(100vh - 15rem);
-    // position: relative;  // absolute controls relative to this
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
@@ -175,7 +146,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: center;
     text-align: center;
     padding: 2.5rem 3rem;
     margin: 3rem 3.5rem;
@@ -202,7 +172,7 @@
   }
 }
 
-@keyframes appearGradually {
+@keyframes fadeIn {
   from {
     opacity: 0;
   }
