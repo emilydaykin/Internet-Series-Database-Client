@@ -27,3 +27,11 @@
   }
 }
 
+@media (max-width: 460px) {
+  .navbar {
+    &__item {
+      font-size: 1.4rem;
+      padding: 1rem;
+    }
+  }
+}
