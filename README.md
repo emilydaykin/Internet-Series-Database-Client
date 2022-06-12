@@ -11,7 +11,7 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
 4. [Features](#features)  
 5. [Architecture](#architecture) 
 6. [Data Collection &#38; Curation](#data-collection--curation) 
-7. [Featured Code Snippets](#featured-code-snippets) ([Front End](#front-end) & [Back End](#back-end))
+7. [Featured Code Snippets](#featured-code-snippets) ([Front End](#front-end-client) & [Back End](#back-end-server))
 8. [Challenges & Wins](#challenges--wins) 
 9. [Key Learnings](#key-leanrings) 
 
@@ -24,8 +24,8 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
 # Installation:
 - Check out the [deployed version](#)!
 - Or run and test locally:
-  - **Back End**: Clone the [backend repo](https://github.com/emilydaykin/Internet-Series-Database-API) &rarr; Run MongoDB locally &rarr; `npm i` &rarr; `npm run test` (XX test suits and XX tests) &rarr; `npm run start:server`
-  - **Front End**: Clone this repo &rarr; `npm i` &rarr; `npm run test` (XX test suits and XX tests) &rarr; `npm run start:client`
+  - **Back End**: Clone the [backend repo](https://github.com/emilydaykin/Internet-Series-Database-API) &rarr; Run MongoDB locally &rarr; `npm i` &rarr; `npm run test` (25 tests across 6 test suites) &rarr; `npm run start:server`
+  - **Front End**: Clone this repo &rarr; `npm i` &rarr; `npm run test` (31 tests across 6 test suites) &rarr; `npm run start:client`
 
 # Tech Stack
 - Front End: React.js SPA, React-Router-Dom,  Sass (BEM)
@@ -74,7 +74,6 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
   - UserProfile (3 unit tests & 2 integration tests)
   - ElasticCarousel (4 unit tests)
 
-
 ### Back End:
 - Secure routing middleware to ensure user groups (authenticated users and admins) are granted appropriate access rights
 - Error handling middleware to assist with debugging
@@ -99,7 +98,7 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
   
 
 # Featured Code Snippets
-### Front End
+### Front End (Client)
 - Recommender System (generates a list of series based on the modal genre of a user's favourites):
 
   ```
@@ -119,10 +118,155 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
     }
   };
   ```
-- carousel and card flip CSS (fe)
-- testing snippet
+- Carousel and card flip design in CSS. The carousel takes props that will show either favourites or recommendations:
 
-### Back End
+  ```
+  // Full code: $src/components/ElasticCarousel.js
+
+  const ElasticCarousel = ({ seriesList, listType }) => {
+    const responsiveBreakPoints = [
+      { width: 1, itemsToShow: 1 },
+      { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+      { width: 768, itemsToShow: 3 },
+      { width: 1200, itemsToShow: 4 }
+    ];
+
+    return (
+      <div className='carousel'>
+        {seriesList && seriesList.length > 0 ? (
+          <Carousel breakPoints={responsiveBreakPoints}>
+            {seriesList.map((series) => (
+              <Link
+                key={series._id}
+                to={`/series/${series._id}`}
+                className={`card card--${listType}`}
+              >
+                <div className='card__side card__side--front'>
+                  <img src={series.image} alt={series.name} className='carousel__image' />
+                </div>
+                <div className='card__side card__side--back'>
+                  <p className='card__title'>{series.name}</p>
+                  <p className='card__details card__details--years'>
+                    ({series.pilotYear}&#8212;{series.finaleYear})
+                  </p>
+                  <p className='card__details card__details--rating'>⭐️ {series.rating} ⭐️</p>
+                  <p className='card__details card__details--genres'>{series.genre.join(' • ')}</p>
+                  <p className='card__details card__details--actors'>
+                    {series.actors.map((actor) => (
+                      <span key={actor}>{actor}</span>
+                    ))}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </Carousel>
+        ) : (
+          <p>
+            {listType === 'favourites'
+              ? 'No favourites yet.'
+              : 'No recommendations yet. Add some series to your Favourites list get some recommendations!'}
+          </p>
+        )}
+      </div>
+    );
+  };
+  ```
+  ```
+  // Full code: $src/styles/components/_elastic-carousel.scss
+  
+  .card {
+    perspective: 150rem;
+    
+    &__side {
+      transition: all .8s ease;
+      backface-visibility: hidden;
+      position: relative;
+
+      &--back {
+        transform: rotateY(180deg);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    &:hover &__side--front {
+      transform: rotateY(-180deg);
+    }
+
+    &:hover &__side--back {
+      transform: rotateY(0);
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        width: .5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background-color: rgba($theme-grey, .6);
+      }
+    }
+  }
+  ```
+- Unit Testing the Home page's search bar and filter buttons
+  ```
+  test('Assert search bar input is accepted and displayed correctly.', async () => {
+    await act(async () =>
+      render(
+        <BrowserRouter>
+          <Home />
+        </BrowserRouter>
+      )
+    );
+    const searchBarInput = screen.getByRole('textbox', { className: /home__search-bar/i });
+    expect(searchBarInput).toBeInTheDocument();
+
+    const searchTerm = 'sherloc';
+    userEvent.type(searchBarInput, searchTerm);
+
+    await waitFor(() => {
+      expect(searchBarInput.value).toEqual(searchTerm);
+    });
+  });
+
+  test('Assert genre filters are displayed correctly based on series available.', async () => {
+    axios.get = jest.fn();
+    axios.get.mockResolvedValueOnce({ data: mockSeriesData });
+
+    await act(async () =>
+      render(
+        <BrowserRouter>
+          <Home />
+        </BrowserRouter>
+      )
+    );
+
+    // Assert filter 'heading' is displayed
+    const filterHeading = screen.getByText(/filter by genre/i, {
+      className: 'home__controls-heading'
+    });
+    expect(filterHeading).toBeInTheDocument();
+
+    // Assert genre options are displayed:
+    const genresPresent = ['Crime', 'Drama', 'Biography'];
+    genresPresent.forEach((genre) => {
+      const genreFilterButton = screen.getByText(genre, { className: 'home__filter' });
+      expect(genreFilterButton).toBeInTheDocument();
+    });
+
+    // Assert genres that aren't present in mockSeriesData is NOT part of filter list:
+    const genresMissing = ['Fantasy', 'History', 'Reality-TV'];
+    genresMissing.forEach((genre) => {
+      const genreFilterButton = screen.queryByText(genre, { className: 'home__filter' });
+      expect(genreFilterButton).not.toBeInTheDocument();
+    });
+  });
+  ```
+
+### Back End (Server)
 - Scraping IMDb:
 
   ```
@@ -214,7 +358,7 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
     }
   };
   ```
-- Testing some Comments POST and GET request endpoints:
+- Testing some Comments Controller's POST and GET request endpoints:
 
   ```
   // Full code: $__tests__/comment.test.js
