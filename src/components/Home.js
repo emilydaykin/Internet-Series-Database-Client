@@ -114,13 +114,13 @@ const Home = () => {
               value={searchInput}
             />
             <p className='home__controls-heading'>
-              {filtersChosen.length > 0 ? (
+              {/* {filtersChosen.length > 0 ? (
                 <button className='home__clear-filter' onClick={clearFilter}>
                   Clear Filter
                 </button>
-              ) : (
-                'Filter By Genre:'
-              )}
+              ) : ( */}
+              Filter By Genre:
+              {/* )} */}
             </p>
             {uniqueGenres.length !== 0 ? (
               <div className='home__filters'>
