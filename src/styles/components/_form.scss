@@ -48,4 +48,17 @@
   .form-wrapper {
     margin-top: 4rem;
   }
+
+  .form {
+    &__input-fields-wrapper {
+      flex-direction: column;
+    }
+
+    &__field {
+      &--pilot-year {
+        margin: 0 1rem;
+      }
+    }
+  }
+
 }
