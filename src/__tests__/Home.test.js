@@ -116,7 +116,9 @@ test('Assert search/filter controls are hidden upon inital render', async () => 
   );
 
   const hiddenControlsInitial = screen.queryByText((content, element) => {
-    return element.tagName.toLowerCase() === 'div' && element.className === 'u-collapse';
+    return (
+      element.tagName.toLowerCase() === 'div' && element.className === 'home__collapse-controls'
+    );
   });
   expect(hiddenControlsInitial).toBeInTheDocument();
 
