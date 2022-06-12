@@ -1,5 +1,5 @@
 # Internet Series Database (ISDb)
-ISDb is a tested, full stack MERN (MongoDB, Express, React & Node) web and mobile application that allows users to browse and filter TV series, add them to their 'favourites' list, leave reviews and ratings, and get recommendations based on their favourites; admins can further add new series to the catalogue. Seed data for the series was generated dynamically by web scraping IMDb.
+ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web and mobile application that allows users to browse and filter TV series, add them to their 'favourites' list, get recommendations based on their favourites, and leave reviews and ratings; admins can further add new series to the catalogue. Seed data for the series was generated dynamically by **web scraping** IMDb, and the **recommender system** is a very simple one that generates series based on the modal genre of a user's favourites (the first is taken if more than one). 56 different aspects, components and functionalities are tests across **12 test suites**, server-side and client-side.
 
 **This repo contains code for the front end client only; code for the back end api lives [here](https://github.com/emilydaykin/Internet-Series-Database-API).**
 
@@ -23,17 +23,20 @@ ISDb is a tested, full stack MERN (MongoDB, Express, React & Node) web and mobil
 # Installation:
 - Check out the [deployed version](#)!
 - Or run and test locally:
-  - Back End: Clone the [backend repo](https://github.com/emilydaykin/Internet-Series-Database-API) &rarr; Run MongoDB locally &rarr; `npm i` &rarr; `npm run start:server`
-  - Front End: Clone this repo &rarr; `npm i` &rarr; `npm run test` (XX test suits and XX tests) &rarr; `npm run start:client`
+  - **Back End**: Clone the [backend repo](https://github.com/emilydaykin/Internet-Series-Database-API) &rarr; Run MongoDB locally &rarr; `npm i` &rarr; `npm run test` (XX test suits and XX tests) &rarr; `npm run start:server`
+  - **Front End**: Clone this repo &rarr; `npm i` &rarr; `npm run test` (XX test suits and XX tests) &rarr; `npm run start:client`
 
 # Tech Stack
-- Front End: React.js SPA, Sass (BEM)
+- Front End: React.js SPA, React-Router-Dom,  Sass (BEM)
 - Back End: Node, MongoDB, Mongoose, Express, Python
 - Data Collection: Web scraping with Python
 - Authentication: JSON Web Token (JWT)
+- Security:
+  - Safeguarding from injection attacks: Express-Mongo-Sanitize
+  - Password Encryption: Bcrypt
 - Testing: 
-  - Front end: Jest for mocks, React Testing Library
-  - Back End: ¿mocha/chai/supertest???
+  - Front end: Jest for mocks, React-Testing-Library
+  - Back End: Mocha, Chai and Supertest
 - Other Packages & Tools: Postman, MongoDB Compass, Axios, Elastic Carousel
 - Deployment: 
   - Front end: Netlify
@@ -46,23 +49,34 @@ ISDb is a tested, full stack MERN (MongoDB, Express, React & Node) web and mobil
   - Searching by title, actor, plot, year, genre or rating
   - Filtering by genre
 - Series-specific information (genre, actors, pilot year, average rating etc...)
-- Commenting on and rating a series once logged in, and deleting your own comment
+- Double-click functionality for logged in users to fill in the 'heart' on series poster, indicating the user has 'favourited' it
 - Recommender System (for logged in users) to suggest series similar to ones they've liked. 
-- Authenticated users can:
+- Authenticated users can also:
   - Add a series to their profile's page via 'favouriting' (double clicking on the series poster on the individual series page)
-  - View their profile page, which displays carousels each for their favourites and resulting recommendations
+  - View their profile page, which displays responsive carousels each for their favourites and resulting recommendations
+    - The carousel cards will flip to its backside on hover, displaying series-specific information, and when active will navigate to series page
+  - Comment on and rate a series once logged in, and deleting the user's own comment
 - Admins have the same rights as non-admin users, but can also add new series to the catalogue
+- The Register and Log In return detailed error messages to the user
 
 # Architecture
-- Secure routing
-- how many model schemas
-- Unit & Integration testing (5 test suites and 31 tests)
-  - Home (6 unit tests)
-  - Navbar (1 unit test)
-  - Login (4 unit tests)
-  - Register (11 unit tests)
-  - UserProfile (3 unit tests & 2 integration tests)
-  - ElasticCarousel (4 unit tests)
+- Secure routing to ensure user groups (authenticated users and admins) are granted appropriate access rights
+- Two model schemas (Series and User), one of which (Series) has nested comments
+- Unit & Integration testing:
+  - **Front End** (31 tests in 6 test suites):
+    - Home (6 unit tests)
+    - Navbar (1 unit test)
+    - Login (4 unit tests)
+    - Register (11 unit tests)
+    - UserProfile (3 unit tests & 2 integration tests)
+    - ElasticCarousel (4 unit tests)
+  - **Back End** (25 tests in 6 test suites):
+    - Series via GET requests (4 integration tests)
+    - Series via POST requests (3 integration tests)
+    - Register & Login POST requests (4 integration tests)
+    - Favourites & User Authentication via GET and PUT requests (4 integration tests)
+    - Comments / Reviews via POST, DEL and GET requests (4 integration tests)
+    - Admin authentication via GET and POST requests (6 integration tests)
 
 # Data Collection & Curation
 - Dynamically generated seed **series** data via a Python script that scrapes IMDb (see code snippet below).
