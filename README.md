@@ -1,4 +1,5 @@
 # Internet Series Database (ISDb)
+
 ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web and mobile application that allows users to browse and filter TV series, add them to their 'favourites' list, get recommendations based on their favourites, and leave reviews and ratings; admins can further add new series to the catalogue. Seed data for the series was generated dynamically by **web scraping** IMDb, and the **recommender system** is a very simple one that generates series based on the modal genre of a user's favourites (the first is taken if more than one). 56 different aspects, components and functionalities are tests across **12 test suites**, server-side and client-side.
 
 **This repo contains code for the front end client only; code for the back end api lives [here](https://github.com/emilydaykin/Internet-Series-Database-API).**
@@ -60,23 +61,37 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
 - The Register and Log In return detailed error messages to the user
 
 # Architecture
-- Secure routing to ensure user groups (authenticated users and admins) are granted appropriate access rights
-- Two model schemas (Series and User), one of which (Series) has nested comments
-- Unit & Integration testing:
-  - **Front End** (31 tests in 6 test suites):
-    - Home (6 unit tests)
-    - Navbar (1 unit test)
-    - Login (4 unit tests)
-    - Register (11 unit tests)
-    - UserProfile (3 unit tests & 2 integration tests)
-    - ElasticCarousel (4 unit tests)
-  - **Back End** (25 tests in 6 test suites):
-    - Series via GET requests (4 integration tests)
-    - Series via POST requests (3 integration tests)
-    - Register & Login POST requests (4 integration tests)
-    - Favourites & User Authentication via GET and PUT requests (4 integration tests)
-    - Comments / Reviews via POST, DEL and GET requests (4 integration tests)
-    - Admin authentication via GET and POST requests (6 integration tests)
+### Front End:
+- React Components to compartmentalise code
+- React Hooks for state management and handling side effects
+- Sass stylesheets that follow the 7-1 pattern and the BEM methodology
+- Single Page Application (`react-router-dom`) using `Link`, `useNavigate`, `useLocation` and `useParams`
+- Unit testing (31 tests across 6 test suites):
+  - Home (6 unit tests)
+  - Navbar (1 unit test)
+  - Login (4 unit tests)
+  - Register (11 unit tests)
+  - UserProfile (3 unit tests & 2 integration tests)
+  - ElasticCarousel (4 unit tests)
+
+
+### Back End:
+- Secure routing middleware to ensure user groups (authenticated users and admins) are granted appropriate access rights
+- Error handling middleware to assist with debugging
+- Two interlinked model schemas in MongoDB (Series and User), one of which (Series) has a nested Comments model
+- Data seeding of 25 user profiles, 15 comments and 3 posts.
+- All security checks (user access credentials) done in the back end:
+  - Email validation (correct format and uniqueness)
+  - Password validation (encryption and strength: minimum of 8 characters, at least one lowercase & uppercase letter and number)
+  - Obscuring the password response from the front end
+  - Login credentials expire after 6 hours
+- Integration testing (25 tests across 6 test suites):
+  - Series via GET requests (4 integration tests)
+  - Series via POST requests (3 integration tests)
+  - Register & Login POST requests (4 integration tests)
+  - Favourites & User Authentication via GET and PUT requests (4 integration tests)
+  - Comments / Reviews via POST, DEL and GET requests (4 integration tests)
+  - Admin authentication via GET and POST requests (6 integration tests)
 
 # Data Collection & Curation
 - Dynamically generated seed **series** data via a Python script that scrapes IMDb (see code snippet below).
@@ -85,12 +100,30 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
 
 # Featured Code Snippets
 ### Front End
-- reommender system (fe)
+- Recommender System (generates a list of series based on the modal genre of a user's favourites):
+
+  ```
+  // Full code: $src/components/UserProfile.js
+
+  const getRecommendations = () => {
+    if (allSeries && favourites) {
+      const nonLikedSimilaries = allSeries.filter(
+        (series) =>
+          series.genre.includes(calculateFavouriteGenre()) &&
+          !favourites.map((likedShow) => likedShow._id).includes(series._id)
+      );
+      const shuffledList = [...nonLikedSimilaries].sort(() => 0.5 - Math.random());
+      return shuffledList.length >= 12 ? shuffledList.slice(0, 12) : shuffledList;
+    } else {
+      return [];
+    }
+  };
+  ```
 - carousel and card flip CSS (fe)
 - testing snippet
 
 ### Back End
-- Scraping IMDb (be):
+- Scraping IMDb:
 
   ```
   # Full code: $db/data/scraping_imdb.py
@@ -130,7 +163,7 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
     except Exception as err:
       print(f'Error "{err}" for the URL {url}')
   ```
-- Creating comments data using the User and Series models (be):
+- Creating comments data using the User and Series models:
 
   ```
   // Full code: $db/seed.js
@@ -149,8 +182,94 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
   
   await lastDance.save();
   ```
-- add to user favourites controller (be)
-- testing snippet
+- API endpoint to update (add or remove) a series from a user's "favourites" list:
+
+  ```
+  // Full code: $controllers/usersController.js
+
+  const addUserFavourites = async (req, res, next) => {
+    try {
+      if (!req.currentUser) {
+        res
+          .status(400)
+          .json({ message: "Unauthorised. You must be logged in to 'favourite' a series" });
+      } else {
+        // Get series (that user clicked on):
+        const series = await Series.findById(req.body.seriesId);
+        const userFavouritedAlready = !!req.currentUser.favouriteSeries.find(
+          (item) => item._id.toString() === req.body.seriesId
+        );
+        if (userFavouritedAlready) {
+          // remove from favourites list if already in list
+          await User.updateOne({ _id: req.currentUser._id }, { $pull: { favouriteSeries: series } });
+        } else {
+          // add to favourites list if not in there
+          await User.updateOne({ _id: req.currentUser._id }, { $push: { favouriteSeries: series } });
+        }
+        const updatedUser = await User.findById(req.currentUser._id);
+        res.status(200).json(updatedUser);
+      }
+    } catch (err) {
+      next(err);
+    }
+  };
+  ```
+- Testing some Comments POST and GET request endpoints:
+
+  ```
+  // Full code: $__tests__/comment.test.js
+
+  let userToken;
+  let userId;
+  let seriesId;
+
+  describe('Testing COMMENTS', () => {
+    beforeEach(() => setUp());
+    beforeEach(async () => {
+      // Get a user token (the one who's written comments):
+      const resp = await api
+        .post('/api/login')
+        .send({ email: 'jo@user.com', password: 'Password1!@' });
+      userToken = resp.body.token;
+      const jwtDecoded = jwt.verify(userToken, secret);
+      userId = jwtDecoded.userId;
+
+      // Get a series id:
+      const seriesResp = await api.get('/api/series/arrested');
+      seriesId = seriesResp.body[0]._id;
+    });
+    afterEach(() => tearDown());
+
+    it('Assert user can create a review on a series (POST & GET)', async () => {
+      const resp = await api
+        .post(`/api/series/${seriesId}/comments`)
+        .set('Authorization', `Bearer ${userToken}`)
+        .send(mockComment);
+      expect(resp.status).to.eq(201);
+
+      // check comment is there:
+      const getResp = await api.get('/api/series/arrested');
+      expect(getResp.body).to.be.an('array');
+      expect(getResp.body.length).to.eq(1);
+      const comments = getResp.body[0].comments;
+      expect(comments).to.be.an('array');
+      expect(comments.length).to.eq(2);
+      const targetComment = comments.find((comment) => comment.text === 'Not bad');
+      expect(targetComment.rating).to.eq(4);
+      expect(targetComment.createdById).to.eq(userId);
+      expect(targetComment.createdByName).to.eq('jo');
+    });
+
+    it('Assert error when unauthenticated user tries to leave a review on a series (POST)', async () => {
+      const resp = await api.post(`/api/series/${seriesId}/comments`).send(mockComment);
+      expect(resp.status).to.eq(401);
+      expect(resp.body.message).to.deep.include('Unauthorised. No token or invalid token.');
+    });
+
+    ...
+
+  });
+  ```
 
 # Challenges & Wins:
 This was the first time I'd ever implemented testing in javascript, so learning Jest and React Testing Library for front end testing, and mocha/chai/supertest??? for the back end was incredibly rewarding.
