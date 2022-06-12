@@ -63,7 +63,7 @@ test('Assert carousels are displayed if user has favourited series', async () =>
 
   // axios.get = jest.fn();
   // axios.get.mockResolvedValueOnce({ data: mockSeriesData });
-  axios.get.mockResolvedValue({ data: mockSeriesData });
+  // axios.get.mockResolvedValue({ data: mockSeriesData });
 
   axios.get.mockImplementation((url) => {
     switch (url) {
@@ -93,7 +93,7 @@ test('Assert carousels are displayed if user has favourited series', async () =>
   axios.get('/api/users/testUser000').then((resp) => expect(resp.data).toEqual(mockSeriesData[0]));
 
   // const seriesCard = screen.queryByText(mockSeriesData[0].name);
-  // expect(seriesCard).toBeInTheDocument();
+  // expect(seriesCard).toBeInTheDocument(); // FAILS!!!!!!!!!!!!!!!!
 
   // const noFavouritesMessage = screen.queryByText(/no favourites yet/i);
   // // console.log('noFavouritesMessage', noFavouritesMessage);
