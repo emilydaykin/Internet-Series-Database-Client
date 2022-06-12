@@ -32,7 +32,7 @@ const Navbar = () => {
           </Link>
           {isLoggedInUser && adminState && (
             <Link className='navbar__item' to={'/addSeries'}>
-              📺 Add Series 📀
+              📺 Create 📀
             </Link>
           )}
         </div>

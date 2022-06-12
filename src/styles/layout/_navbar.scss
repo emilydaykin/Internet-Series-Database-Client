@@ -27,11 +27,35 @@
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 620px) {
   .navbar {
     &__item {
       font-size: 1.4rem;
       padding: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    height: 12vh;
+
+    &__left, &__right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__left {
+      margin-left: 1rem;
+    }
+    
+    &__right {
+      margin-right: 1rem;
+      text-align: right;
+    }
+
+    &__item {
+      padding: .5rem;
     }
   }
 }
