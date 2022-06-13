@@ -2,9 +2,9 @@
   display: flex;
   justify-content: center;
   
-  &__text {
+  &__text, &__break-half {
     display: flex;
-    text-align: center;
+    align-items: center;
     color: #888888;
     font-size: 1.5rem;
     font-weight: 600;
@@ -13,6 +13,7 @@
 
   a {
     text-decoration: none;
+    display: flex;
   }
 
   &__linkedin {
@@ -32,6 +33,24 @@
     &:hover {
       border-radius: 5px;
       background-color: #007693;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .footer {
+
+    &__text{
+      font-size: 1.35rem;
+      flex-direction: column;
+    }
+    
+    &__break-half {
+      font-size: 1.35rem;
+    }
+
+    &__github {
+      height: 1.7rem; 
     }
   }
 }
