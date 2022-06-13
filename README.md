@@ -1,6 +1,6 @@
 # Internet Series Database (ISDb)
 
-ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web and mobile application that allows users to browse and filter TV series, add them to their 'favourites' list, get recommendations based on their favourites, and leave reviews and ratings; admins can further add new series to the catalogue. Seed data for the series was generated dynamically by **web scraping** IMDb, and the **recommender system** is a very simple one that generates series based on the modal genre of a user's favourites (the first is taken if more than one). 56 different aspects, components and functionalities are tests across **12 test suites**, server-side and client-side.
+[ISDb](https://internet-series-db.netlify.app/) is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web and mobile application that allows users to browse and filter TV series, add them to their 'favourites' list, get recommendations based on their favourites, and leave reviews and ratings; admins can further add new series to the catalogue. Seed data for the series was generated dynamically by **web scraping** IMDb, and the **recommender system** is a very simple one that generates series based on the modal genre of a user's favourites (the first is taken if more than one). 56 different aspects, components and functionalities are tests across **12 test suites**, server-side and client-side.
 
 **This repo contains code for the front end client only; code for the back end api lives [here](https://github.com/emilydaykin/Internet-Series-Database-API).**
 
@@ -54,10 +54,11 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
   <img src="./assets/readme/add_series.png" width="28.3%"  />
 </p>
 
-
-
 # Installation:
-- Check out the [deployed version](#)!
+- Check out the [deployed version](https://internet-series-db.netlify.app/)!
+  - Feel free to register to use your own log-in credentials, or try a demo one using:
+    - Email: `sierra@user.com`
+    - Password: `Password1!@`
 - Or run and test locally:
   - **Back End**: Clone the [backend repo](https://github.com/emilydaykin/Internet-Series-Database-API) &rarr; Run MongoDB locally &rarr; `npm i` &rarr; `npm run test` (25 tests across 6 test suites) &rarr; `npm run start:server`
   - **Front End**: Clone this repo &rarr; `npm i` &rarr; `npm run test` (31 tests across 6 test suites) &rarr; `npm run start:client`
