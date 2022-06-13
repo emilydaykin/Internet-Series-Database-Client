@@ -33,19 +33,15 @@ module.exports = (webpackEnv) => {
       ]
     },
     devServer: {
-      // publicPath: '/',
-      // contentBase: path.resolve('src'),
       hot: true,
       open: true,
       port: 8002,
-      // watchContentBase: true,
       historyApiFallback: true,
       proxy: {
-        // ! This tells webpack about express. Any requests to we prefix with /api will get redirected to express!
+        // Redirect any requests prefixed with /api to express!
         '/api': {
-          // Our express server. It's not running on https, so it'll be http!
           target: 'http://localhost:8001',
-          // This is for development purposes only, so we aren't too worried about securing our proxy!
+          // Dev, so no need to secure
           secure: false
         }
       }
