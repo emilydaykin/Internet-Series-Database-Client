@@ -41,10 +41,14 @@ const Login = () => {
   }
 
   return (
-    <section>
+    <section className='auth'>
       <h1>
-        <span>LSDb</span> Login
+        <span>LSDb</span> Log In
       </h1>
+      <p className='auth__subtext'>
+        Log in to add series to your 'favourites' list, and get recommendations of other series you
+        may like!
+      </p>
       <div className='form-wrapper'>
         <form onSubmit={handleSubmit} className='form'>
           <div className='form__field form__field--email'>

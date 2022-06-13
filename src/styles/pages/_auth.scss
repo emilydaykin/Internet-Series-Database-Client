@@ -1,0 +1,16 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin-top: .5rem;
+  }
+
+  &__subtext {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 4rem;  // this is too much for smaller widths....
+    max-width: 57rem;
+    align-self: center;
+  }
+}
