@@ -96,7 +96,6 @@ test('Assert carousels are displayed if user has favourited series', async () =>
   // expect(seriesCard).toBeInTheDocument(); // FAILS!!!!!!!!!!!!!!!!
 
   // const noFavouritesMessage = screen.queryByText(/no favourites yet/i);
-  // // console.log('noFavouritesMessage', noFavouritesMessage);
   // expect(noFavouritesMessage).not.toBeInTheDocument();  // FAILS!!!!!!!!!!!!!!!!
   // const noRecommendationsMessage = screen.queryByText(/no recommendations yet/i);
   // expect(noRecommendationsMessage).not.toBeInTheDocument();

@@ -9,8 +9,6 @@ const ElasticCarousel = ({ seriesList, listType }) => {
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 }
   ];
-  // console.log('seriesList FROM INSIDE ElasticCAROUSEL: ------ ', seriesList);
-  // console.log('listType FROM INSIDE ElasticCAROUSEL: ------ ', listType);
 
   return (
     <div className='carousel'>

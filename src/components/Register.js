@@ -15,15 +15,12 @@ const Register = () => {
 
   function handleChange(e) {
     setErrorMessage('');
-    // console.log('e.target.id', e.target.id);
-    // console.log('e.target.value', e.target.value);
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
 
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      // console.log('register submit clicked!');
       await registerUser({
         username: formData.name,
         email: formData.email,
@@ -32,7 +29,6 @@ const Register = () => {
       });
       navigate('/login');
     } catch (err) {
-      // console.log('formData', formData);
       if (
         formData.name === '' &&
         formData.email === '' &&
@@ -51,11 +47,9 @@ const Register = () => {
       } else {
         if (err.response) {
           // This comes from the backend
-          // console.log('err.response.data.message', err.response.data.message);
           setErrorMessage(err.response.data.message);
         } else {
           // This comes from the front end
-          // console.log('err.response', err.response);
           // VERY HACKY (this makes the test pass and won't appear to user)
           setErrorMessage('Undefined error message (from backend).');
         }

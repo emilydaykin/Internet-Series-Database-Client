@@ -16,16 +16,13 @@ const UserProfile = () => {
       try {
         const allSeries = await getAllSeries();
         setAllSeries(allSeries.data);
-      } catch (err) {
-        // console.log('useEffect error in UserProfile:', err);
-      }
+      } catch (err) {}
     };
     getSeriesData();
 
     const getFavouritesData = async () => {
       try {
         const userFavourites = await getUserFavourites(userObject.userId);
-        // console.log('userFavourites', userFavourites);
         setFavourites(userFavourites);
       } catch (err) {}
     };
@@ -35,17 +32,14 @@ const UserProfile = () => {
   const calculateFavouriteGenre = () => {
     if (favourites) {
       const allLikedGenres = favourites.map((series) => series.genre).flat();
-      // console.log('allLikedGenres', allLikedGenres);
       const genreCount = {};
       allLikedGenres.forEach(
         (genre) => (genreCount[genre] = genreCount[genre] ? genreCount[genre] + 1 : 1)
       );
-      // console.log('genreCount', genreCount);
       const maxGenreOccurance = Math.max(...Object.values(genreCount));
       const favouriteGenre = Object.keys(genreCount).find(
         (key) => genreCount[key] === maxGenreOccurance
       );
-      // console.log('favouriteGenre', favouriteGenre, `(${maxGenreOccurance})`);
       return favouriteGenre;
     }
   };
@@ -53,19 +47,15 @@ const UserProfile = () => {
   const getRecommendations = () => {
     if (allSeries && favourites) {
       // 'similaries' = modal genre in their 'liked' list
-      // console.log('fave genre:', calculateFavouriteGenre());
       const nonLikedSimilaries = allSeries.filter(
         (series) =>
           series.genre.includes(calculateFavouriteGenre()) &&
           !favourites.map((likedShow) => likedShow._id).includes(series._id)
       );
-      // console.log('nonLikedSimilaries', nonLikedSimilaries);
       // Shorten the recommendation list by picking 12 random similar series:
       const shuffledList = [...nonLikedSimilaries].sort(() => 0.5 - Math.random());
-      // console.log('shuffledlist length:', shuffledList.length);
       return shuffledList.length >= 12 ? shuffledList.slice(0, 12) : shuffledList; // will return all if length < 12.
     } else {
-      // console.log('No recommendations generated....');
       return [];
     }
   };

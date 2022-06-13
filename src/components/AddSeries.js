@@ -17,9 +17,6 @@ const AddSeries = () => {
   });
 
   function handleChange(e) {
-    // console.log('e.target.id', e.target.id);
-    // console.log('e.target.value', e.target.value);
-
     if (e.target.id === 'genre' || e.target.id === 'actors') {
       const splitString = e.target.value.split(',');
       const cleanedArray = splitString.map((genre) => genre.trim());
@@ -29,12 +26,8 @@ const AddSeries = () => {
     }
   }
 
-  console.log('newSeries', newSeries);
-
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('submit clicked!');
-    // loginUser({ email: emailValue, password: passwordValue });
     await createSeries({
       name: newSeries.name,
       genre: newSeries.genre,

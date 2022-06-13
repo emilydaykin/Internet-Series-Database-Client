@@ -19,7 +19,6 @@ const ShowSeries = () => {
   useEffect(() => {
     const getData = async () => {
       const show = await getSeriesBySearchTerm(id);
-      console.log('show', show);
       setSeries(show);
     };
     getData();
@@ -51,8 +50,6 @@ const ShowSeries = () => {
 
   async function handleCommentSubmit(e) {
     e.preventDefault();
-    console.log('submitted!');
-    console.log(e.target.value);
     const data = await createComment(id, {
       text: commentValue,
       rating: ratingValue,

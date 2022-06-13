@@ -15,13 +15,10 @@ const Home = () => {
     const getData = async () => {
       try {
         const allSeries = await getAllSeries();
-        // console.log('all series:', allSeries);
         setSeries(allSeries.data.sort(() => 0.5 - Math.random()));
         const allGenres = allSeries.data.map((series) => series.genre);
         setUniqueGenres([...new Set(allGenres.flat())]);
       } catch (err) {
-        // console.log('useEffect getData error');
-        // console.log('useEffect getData error', err);
         setIsError(true);
       }
     };
@@ -32,13 +29,8 @@ const Home = () => {
     const filterSeries = async () => {
       try {
         const filteredSeries = await filterSeriesByGenre(filtersChosen);
-        // console.log('filteredSeries', filteredSeries);
         setSeries(filteredSeries);
-      } catch (err) {
-        // console.log('useEffect filterSeries error');
-        // console.log('useEffect filterSeries error', err);
-        // setIsError(true);
-      }
+      } catch (err) {}
     };
     filterSeries();
   }, [filtersChosen]);
@@ -48,31 +40,23 @@ const Home = () => {
   };
 
   const handleExpand = () => {
-    // console.log('clicked');
     setShowControls(!showControls);
   };
 
   const handleSearch = async (e) => {
-    // console.log('e.target.value', e.target.value);
-    // setFiltersChosen([]);
     setSearchInput(e.target.value);
     const searchSeries = async () => {
       try {
         const searchResults = await getSeriesBySearchTerm(e.target.value);
         setSeries(searchResults);
-      } catch (err) {
-        // console.log('error');
-        // setIsError(true);
-      }
+      } catch (err) {}
     };
     searchSeries();
   };
 
   const selectFilter = (e) => {
-    // console.log(`${e.target.childNodes[0].data} clicked!!!!!!!!`);
     setSearchInput('');
     const genreChosen = e.target.childNodes[0].data.toLowerCase();
-    // console.log('genreChosen', genreChosen);
     if (!filtersChosen.includes(genreChosen)) {
       setFiltersChosen([...filtersChosen, genreChosen]);
     } else {
@@ -82,12 +66,8 @@ const Home = () => {
     e.target.classList.toggle('home__filter--selected');
   };
 
-  // console.log('filtersChosen:', filtersChosen);
-  // console.log('FILTERED series:', series);
-
   const clearFilter = (e) => {
     setFiltersChosen([]);
-    console.log(e);
   };
 
   const truncateText = (text, maxLength) => {
@@ -175,7 +155,6 @@ const Home = () => {
               No series matching a genre combination of{' '}
               {filtersChosen
                 .map((genre) => {
-                  // console.log('GENREEEE', genre);
                   const genreTitleCase =
                     genre.slice(0, 1).toUpperCase() + genre.slice(1, genre.length);
                   if (genre === filtersChosen[filtersChosen.length - 1]) {

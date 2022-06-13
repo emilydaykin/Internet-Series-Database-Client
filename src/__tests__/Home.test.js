@@ -128,7 +128,6 @@ test('Assert search/filter controls are hidden upon inital render', async () => 
   expect(displayedControlsInitial).not.toBeInTheDocument();
 
   const expandControlsButtonInitial = screen.queryByText(/expand/i);
-  // console.log('expandControlsButtonInitial', expandControlsButtonInitial);
   expect(expandControlsButtonInitial).toBeInTheDocument();
 
   const hideControlsButtonInitial = screen.queryByText(/hide/i);
