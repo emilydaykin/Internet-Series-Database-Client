@@ -16,10 +16,45 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
 9. [Key Learnings](#key-leanrings) 
 
 # Application Walkthrough
-## Web App
-- screenshots
-- screenshots
-## Mobile App
+### Series Catalogue
+<p align="center">
+  <img src="./assets/readme/home_page_scroll.gif" width="95%"  />
+</p>
+
+### Expand and Collapse Search and Filter Tools (web vs mobile)
+<p align="center">
+  <img src="./assets/readme/expand_collapse.gif" width="75%"  />
+  <img src="./assets/readme/expand_collapse_responsive.gif" width="22.4%"  />
+</p>
+
+## Favouriting & Recommendations Carousel
+<p align="center">
+  <img src="./assets/readme/favouriting_and_carousel.gif" width="95%"  />
+</p>
+
+## Responsive Carousel
+<p align="center">
+  <img src="./assets/readme/responsive_carousel_4.png" width="95%"  />
+</p>
+<p align="center">
+  <img src="./assets/readme/responsive_carousel_3.png" width="44%"  />
+  <img src="./assets/readme/responsive_carousel_2.png" width="33%"  />
+  <img src="./assets/readme/responsive_carousel_1.png" width="21%"  />
+</p>
+
+## Leaving and Deleting your Review
+<p align="center">
+  <img src="./assets/readme/commenting.gif" width="95%"  />
+</p>
+
+## Log In, Register and Add Series (admin-only) pages
+<p align="center">
+  <img src="./assets/readme/login.png" width="32%"  />
+  <img src="./assets/readme/register.png" width="32%"  />
+  <img src="./assets/readme/add_series.png" width="28.3%"  />
+</p>
+
+
 
 # Installation:
 - Check out the [deployed version](#)!
