@@ -80,7 +80,7 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
 
 
 # Features
-- Display of all series (XX were pre-seeded via scraping IMDb)
+- Display of all series (34 were pre-seeded via scraping IMDb)
 - An expand-collapse search and filter tool for the series catalogue.
   - Searching by title, actor, plot, year, genre or rating
   - Filtering by genre
@@ -246,8 +246,11 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
     }
   }
   ```
-- Unit Testing the Home page's search bar and filter buttons
+- Unit Testing the Home page's search bar and filter buttons:
+
   ```
+  // Full code: $src/__tests__/Home.test.js
+
   test('Assert search bar input is accepted and displayed correctly.', async () => {
     await act(async () =>
       render(
@@ -451,7 +454,7 @@ ISDb is a fully tested, full stack **MERN** (MongoDB, Express, React & Node) web
   ```
 
 # Challenges & Wins:
-This was the first time I'd ever implemented testing in javascript, so learning Jest and React Testing Library for front end testing, and mocha/chai/supertest??? for the back end was incredibly rewarding.
+This was the first time I'd ever implemented testing in javascript, so learning Jest and React Testing Library for front end testing, and Mocha, Chai and Supertest for the back end was incredibly rewarding.
 
 # Key Learnings:
 - It's always easier to get the data needed in the front end by creating a new api endpoint in the back end, rather than appending it to a user's (JWT) token payload, which doesn't update as easily/in real time in session storage.
