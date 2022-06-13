@@ -8,6 +8,7 @@ import Register from './Register';
 import AddSeries from './AddSeries';
 import UserProfile from './UserProfile';
 import { getLoggedInUser, isAdmin } from '../lib/auth';
+import Footer from './Footer';
 
 const App = () => (
   <BrowserRouter>
@@ -20,6 +21,7 @@ const App = () => (
       <Route path='/register' element={<Register />} />
       {getLoggedInUser() && <Route path='/userprofile' element={<UserProfile />} />}
     </Routes>
+    <Footer />
   </BrowserRouter>
 );
 

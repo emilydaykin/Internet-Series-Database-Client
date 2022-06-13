@@ -1,0 +1,37 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  
+  &__text {
+    display: flex;
+    text-align: center;
+    color: #888888;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: .05rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  &__linkedin {
+    color: #3a5864;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &:hover {
+      cursor: pointer;
+      color: $theme-midnight-blue;
+    }
+  }
+
+  &__github {
+    height: 2rem;
+
+    &:hover {
+      border-radius: 5px;
+      background-color: #007693;
+    }
+  }
+}
