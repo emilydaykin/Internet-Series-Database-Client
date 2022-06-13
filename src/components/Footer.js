@@ -8,11 +8,15 @@ const Footer = () => {
         <div className='footer__break footer__break--one'>
           Designed, Created and Built by&nbsp;
           <div className='footer__break-one-subset'>
-            <a className='footer__linkedin' href='https://www.linkedin.com/in/emily-daykin/'>
+            <a
+              className='footer__linkedin'
+              href='https://www.linkedin.com/in/emily-daykin/'
+              target='_blank'
+            >
               Emily Daykin
             </a>
             &nbsp;
-            <a href='https://github.com/emilydaykin'>
+            <a href='https://github.com/emilydaykin' target='_blank'>
               <img src={githubLogo} alt='github' className='footer__github' />
             </a>
           </div>
