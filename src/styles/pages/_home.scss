@@ -10,7 +10,7 @@
     margin: 2rem 0 0 2rem;
     position: relative;
     transition: all .3s linear;
-    width: fit-content
+    height: 77vh;
   }
 
   &__expand-controls {
@@ -55,6 +55,8 @@
     visibility: hidden;
     transform: translateX(-10rem);
     transition: all .5s linear;
+    max-height: 80vh;
+    overflow-y: scroll;
   }
 
   &__search-bar {
@@ -98,6 +100,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    height: 100%;
+    overflow-y: scroll;
   }
   
   &__filter {
@@ -216,6 +220,7 @@
 
     &__controls-wrapper {
       margin: 2rem 0 0 0;
+      height: unset;
     }
 
     &__controls {
