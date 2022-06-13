@@ -51,7 +51,7 @@ const AddSeries = () => {
   return (
     <section className='add-series'>
       <h1>
-        <span>LSDb</span> Add a Series
+        <span>ISDb</span> Add a Series
       </h1>
       <div className='form-wrapper'>
         <form className='form' onSubmit={handleSubmit}>

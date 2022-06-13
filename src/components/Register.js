@@ -66,7 +66,7 @@ const Register = () => {
   return (
     <section className='auth'>
       <h1>
-        <span>LSDb</span> Register
+        <span>ISDb</span> Register
       </h1>
       <p className='auth__subtext'>
         Create an account to add series to your 'favourites' list, and get recommendations of other

@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <section className='auth'>
       <h1>
-        <span>LSDb</span> Log In
+        <span>ISDb</span> Log In
       </h1>
       <p className='auth__subtext'>
         Log in to add series to your 'favourites' list, and get recommendations of other series you
