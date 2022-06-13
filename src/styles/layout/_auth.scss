@@ -9,8 +9,16 @@
   &__subtext {
     font-size: 1.6rem;
     text-align: center;
-    margin-bottom: 4rem;  // this is too much for smaller widths....
+    margin-bottom: 4rem;
     max-width: 57rem;
     align-self: center;
+  }
+}
+
+@media (max-width: 475px) {
+  .auth {
+    &__subtext {
+      margin-bottom: 0;
+    }
   }
 }
