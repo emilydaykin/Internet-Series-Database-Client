@@ -2,13 +2,17 @@
   display: flex;
   justify-content: center;
   
-  &__text, &__break-half {
+  &__text, &__break {
     display: flex;
     align-items: center;
     color: #888888;
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: .05rem;
+  }
+
+  &__break-one-subset {
+    display: flex;
   }
 
   a {
@@ -37,20 +41,39 @@
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 990px) {
+  .footer {
+
+    &__break{
+      font-size: 1.35rem;
+    }
+  }
+}
+
+@media (max-width: 910px) {
   .footer {
 
     &__text{
-      font-size: 1.35rem;
       flex-direction: column;
     }
     
-    &__break-half {
+    &__break {
       font-size: 1.35rem;
     }
 
     &__github {
       height: 1.7rem; 
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .footer {
+
+    &__break {
+      &--one {
+        flex-direction: column;
+      }
     }
   }
 }
