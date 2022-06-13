@@ -3,6 +3,7 @@
 
   &__content {
     display: flex;
+    height: 78vh;
   }
 
   // SEARCH & FILTER CONTROLS
@@ -136,8 +137,7 @@
     justify-content: center;
     align-items: center;
     margin-left: 6rem;
-    max-height: calc(100vh - 15rem);
-    height: calc(100vh - 15rem);
+    height: 99%;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
