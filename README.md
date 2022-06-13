@@ -455,7 +455,7 @@
   ```
 
 # Challenges & Wins:
-This was the first time I'd ever implemented testing in javascript, so learning Jest and React Testing Library for front end testing, and Mocha, Chai and Supertest for the back end was incredibly rewarding.
+This was the first time I'd ever implemented testing in javascript, so learning Jest and React Testing Library for front end testing, and Mocha, Chai and Supertest for the back end was incredibly rewarding and fun. Two testing challenges I haven't yet overcome are described in the [issues section](https://github.com/emilydaykin/Internet-Series-Database-Client/issues) of this repo, namely, (i) accessing an expected render of a nested component, and (ii) passing a backend-generated, API error to the Jest DOM screen reader in the frontend.
 
 # Key Learnings:
 - It's always easier to get the data needed in the front end by creating a new api endpoint in the back end, rather than appending it to a user's (JWT) token payload, which doesn't update as easily/in real time in session storage.
