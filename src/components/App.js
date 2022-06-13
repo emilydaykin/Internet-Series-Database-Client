@@ -7,8 +7,13 @@ import Login from './auth/Login';
 import Register from './Register';
 import AddSeries from './AddSeries';
 import UserProfile from './UserProfile';
-import { getLoggedInUser, isAdmin } from '../lib/auth';
 import Footer from './Footer';
+import { getLoggedInUser, isAdmin } from '../lib/auth';
+import axios from 'axios';
+
+if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = 'https://internet-series-db.herokuapp.com';
+}
 
 const App = () => (
   <BrowserRouter>
