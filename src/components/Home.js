@@ -130,11 +130,11 @@ const Home = () => {
           >
             {showControls ? (
               <p>
-                {screen.width >= 460 ? <span>&laquo;</span> : <span>&uarr;</span>}&ensp;hide search
+                {screen.width >= 720 ? <span>&laquo;</span> : <span>&uarr;</span>}&ensp;hide search
               </p>
             ) : (
               <p>
-                {screen.width >= 460 ? <span>&raquo;</span> : <span>&darr;</span>}&ensp;expand
+                {screen.width >= 720 ? <span>&raquo;</span> : <span>&darr;</span>}&ensp;expand
                 search
               </p>
             )}
