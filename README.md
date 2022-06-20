@@ -109,6 +109,9 @@
   - Register (11 unit tests)
   - UserProfile (3 unit tests & 2 integration tests)
   - ElasticCarousel (4 unit tests)
+  <p align="center">
+    <img src="./assets/readme/frontend_testing.png" alt="frontend testing run" width="90%"  />
+  </p>
 
 ### Back End:
 - Secure routing middleware to ensure user groups (authenticated users and admins) are granted appropriate access rights
@@ -127,6 +130,9 @@
   - Favourites & User Authentication via GET and PUT requests (4 integration tests)
   - Comments / Reviews via POST, DEL and GET requests (4 integration tests)
   - Admin authentication via GET and POST requests (6 integration tests)
+  <p align="center">
+    <img src="./assets/readme/backend_testing.png" alt="backend testing run" width="93%"  />
+  </p>
 
 # Data Collection & Curation
 - Dynamically generated seed **series** data via a Python script that scrapes IMDb (see code snippet below).
