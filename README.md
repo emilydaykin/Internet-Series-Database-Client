@@ -77,7 +77,7 @@
 - Other Packages & Tools: Postman, MongoDB Compass, Axios, Elastic Carousel
 - Deployment: 
   - Front end: Netlify
-  - Back end: Heroku & Mongo Atlas
+  - Back end: ~~Heroku~~ Cyclic & Mongo Atlas
 
 
 # Features
