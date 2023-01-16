@@ -12,7 +12,7 @@ import { getLoggedInUser, isAdmin } from '../lib/auth';
 import axios from 'axios';
 
 if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'https://internet-series-db.herokuapp.com';
+  axios.defaults.baseURL = 'https://internet-series-db.cyclic.app';
 }
 
 const App = () => (
